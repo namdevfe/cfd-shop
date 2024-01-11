@@ -17,7 +17,7 @@ const AuthModal = () => {
           "fade show": !!showAuthModal,
         })}
         $isShow={!!showAuthModal}
-        // onClick={handleCloseAuthModal}
+        onClick={handleCloseAuthModal}
       >
         <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content">
