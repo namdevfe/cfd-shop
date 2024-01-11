@@ -10,10 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "classnames": "^2.5.1",
     "path": "^0.12.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.21.1",
+    "styled-components": "^6.1.8",
     "vite-jsconfig-paths": "^2.0.1"
   },
   "devDependencies": {

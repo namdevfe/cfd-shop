@@ -1,136 +1,174 @@
-import React from "react";
+import { useMainContext } from "@/context/MainContext";
+import cn from "@/utils/cn";
+import React, { useState } from "react";
+import { MenuStyle } from "../StyledComponents";
+import { NavLink } from "react-router-dom";
+import { PATHS } from "@/constants/path";
+
+const MENUS = {
+  MENU: "menu",
+  CATE: "cate",
+};
 
 const MenuMobile = () => {
+  const { handleCloseMenuMobile } = useMainContext();
+  const [selectedTab, setSelectedTab] = useState(MENUS.MENU);
+  const _onTabChange = (e, selectedTab) => {
+    e.preventDefault();
+    setSelectedTab(selectedTab);
+  };
+
   return (
-    <div className="mobile-menu-container">
-      <div className="mobile-menu-wrapper">
-        <span className="mobile-menu-close">
-          <i className="icon-close" />
-        </span>
-        <form action="#" method="get" className="mobile-search">
-          <label htmlFor="mobile-search" className="sr-only">
-            Search
-          </label>
-          <input
-            type="search"
-            className="form-control"
-            name="mobile-search"
-            id="mobile-search"
-            placeholder="Search in..."
-            required
-          />
-          <button className="btn btn-primary" type="submit">
-            <i className="icon-search" />
-          </button>
-        </form>
-        <ul className="nav nav-pills-mobile nav-border-anim" role="tablist">
-          <li className="nav-item">
-            <a
-              className="nav-link active"
-              id="mobile-menu-link"
-              data-toggle="tab"
-              href="#mobile-menu-tab"
-              role="tab"
-              aria-controls="mobile-menu-tab"
-              aria-selected="true"
+    <>
+      {/* Menu mobile overlay */}
+      <div className="mobile-menu-overlay" onClick={handleCloseMenuMobile} />
+
+      {/* Menu mobile */}
+      <div className="mobile-menu-container">
+        <div className="mobile-menu-wrapper">
+          <span className="mobile-menu-close" onClick={handleCloseMenuMobile}>
+            <i className="icon-close" />
+          </span>
+
+          {/* Search */}
+          <form action="#" method="get" className="mobile-search">
+            <label htmlFor="mobile-search" className="sr-only">
+              Search
+            </label>
+            <input
+              type="search"
+              className="form-control"
+              name="mobile-search"
+              id="mobile-search"
+              placeholder="Search in..."
+              required
+            />
+            <button className="btn btn-primary" type="submit">
+              <i className="icon-search" />
+            </button>
+          </form>
+
+          {/* Tab List */}
+          <ul className="nav nav-pills-mobile nav-border-anim" role="tablist">
+            {/* Tab menus */}
+            <li className="nav-item">
+              <a
+                className={cn("nav-link", {
+                  active: selectedTab === MENUS.MENU,
+                })}
+                href="#mobile-menu-tab"
+                onClick={(e) => _onTabChange(e, MENUS.MENU)}
+              >
+                Menu
+              </a>
+            </li>
+
+            {/* Tab categories */}
+            <li className="nav-item">
+              <a
+                className={cn("nav-link", {
+                  active: selectedTab === MENUS.CATE,
+                })}
+                href="#mobile-cats-tab"
+                onClick={(e) => _onTabChange(e, MENUS.CATE)}
+              >
+                Categories
+              </a>
+            </li>
+          </ul>
+
+          {/* Panel menu tab */}
+          <div className="tab-content">
+            <div
+              className={cn("tab-pane fade", {
+                active: selectedTab === MENUS.MENU,
+                show: selectedTab === MENUS.MENU,
+              })}
             >
-              Menu
-            </a>
-          </li>
-          <li className="nav-item">
-            <a
-              className="nav-link"
-              id="mobile-cats-link"
-              data-toggle="tab"
-              href="#mobile-cats-tab"
-              role="tab"
-              aria-controls="mobile-cats-tab"
-              aria-selected="false"
+              <nav className="mobile-nav">
+                <MenuStyle className="mobile-menu">
+                  <li>
+                    <NavLink to={PATHS.HOME}>Home</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to={PATHS.ABOUT}>About Us</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to={PATHS.PRODUCT.INDEX}>Product</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to={PATHS.BLOG.INDEX}>Blog</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to={PATHS.CONTACT}>Contact Us</NavLink>
+                  </li>
+                </MenuStyle>
+              </nav>
+            </div>
+
+            {/* Panel tab categories */}
+            <div
+              className={cn("tab-pane fade", {
+                active: selectedTab === MENUS.CATE,
+                show: selectedTab === MENUS.CATE,
+              })}
             >
-              Categories
+              <nav className="mobile-cats-nav">
+                <ul className="mobile-cats-menu">
+                  <li>
+                    <a className="mobile-cats-lead" href="#">
+                      TV
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">Computers</a>
+                  </li>
+                  <li>
+                    <a href="#">Tablets &amp; Cell Phones</a>
+                  </li>
+                  <li>
+                    <a href="#">Smartwatches</a>
+                  </li>
+                  <li>
+                    <a href="#">Accessories</a>
+                  </li>
+                </ul>
+                {/* End .mobile-cats-menu */}
+              </nav>
+              {/* End .mobile-cats-nav */}
+            </div>
+            {/* .End .tab-pane */}
+          </div>
+          {/* End .tab-content */}
+          <div className="social-icons">
+            <a
+              href="#"
+              className="social-icon"
+              target="_blank"
+              title="Facebook"
+            >
+              <i className="icon-facebook-f" />
             </a>
-          </li>
-        </ul>
-        <div className="tab-content">
-          <div
-            className="tab-pane fade show active"
-            id="mobile-menu-tab"
-            role="tabpanel"
-            aria-labelledby="mobile-menu-link"
-          >
-            <nav className="mobile-nav">
-              <ul className="mobile-menu">
-                <li className="active">
-                  <a href="index.html">Home</a>
-                </li>
-                <li>
-                  <a href="about.html">About Us</a>
-                </li>
-                <li>
-                  <a href="product.html">Product</a>
-                </li>
-                <li>
-                  <a href="blog.html">Blog</a>
-                </li>
-                <li>
-                  <a href="contact.html">Contact Us</a>
-                </li>
-              </ul>
-            </nav>
-            {/* End .mobile-nav */}
+            <a href="#" className="social-icon" target="_blank" title="Twitter">
+              <i className="icon-twitter" />
+            </a>
+            <a
+              href="#"
+              className="social-icon"
+              target="_blank"
+              title="Instagram"
+            >
+              <i className="icon-instagram" />
+            </a>
+            <a href="#" className="social-icon" target="_blank" title="Youtube">
+              <i className="icon-youtube" />
+            </a>
           </div>
-          {/* .End .tab-pane */}
-          <div
-            className="tab-pane fade"
-            id="mobile-cats-tab"
-            role="tabpanel"
-            aria-labelledby="mobile-cats-link"
-          >
-            <nav className="mobile-cats-nav">
-              <ul className="mobile-cats-menu">
-                <li>
-                  <a className="mobile-cats-lead" href="#">
-                    TV
-                  </a>
-                </li>
-                <li>
-                  <a href="#">Computers</a>
-                </li>
-                <li>
-                  <a href="#">Tablets &amp; Cell Phones</a>
-                </li>
-                <li>
-                  <a href="#">Smartwatches</a>
-                </li>
-                <li>
-                  <a href="#">Accessories</a>
-                </li>
-              </ul>
-              {/* End .mobile-cats-menu */}
-            </nav>
-            {/* End .mobile-cats-nav */}
-          </div>
-          {/* .End .tab-pane */}
+          {/* End .social-icons */}
         </div>
-        {/* End .tab-content */}
-        <div className="social-icons">
-          <a href="#" className="social-icon" target="_blank" title="Facebook">
-            <i className="icon-facebook-f" />
-          </a>
-          <a href="#" className="social-icon" target="_blank" title="Twitter">
-            <i className="icon-twitter" />
-          </a>
-          <a href="#" className="social-icon" target="_blank" title="Instagram">
-            <i className="icon-instagram" />
-          </a>
-          <a href="#" className="social-icon" target="_blank" title="Youtube">
-            <i className="icon-youtube" />
-          </a>
-        </div>
-        {/* End .social-icons */}
+        {/* End .mobile-menu-wrapper */}
       </div>
-      {/* End .mobile-menu-wrapper */}
-    </div>
+    </>
   );
 };
 

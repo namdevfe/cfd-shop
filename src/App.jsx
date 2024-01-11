@@ -17,6 +17,12 @@ import Product from "./pages/Product";
 import ProductDetail from "./pages/ProductDetail";
 import Returns from "./pages/Returns";
 import Shipping from "./pages/Shipping";
+import PrivateRoute from "./components/PrivateRoute";
+import Dashboard from "./pages/Dashboard";
+import MyAccount from "./pages/Dashboard/MyAccount";
+import MyWishlist from "./pages/Dashboard/MyWishlist";
+import MyAddress from "./pages/Dashboard/MyAddress";
+import MyOrders from "./pages/Dashboard/MyOrders";
 
 function App() {
   return (
@@ -49,16 +55,45 @@ function App() {
 
           {/* Products page */}
           <Route path={PATHS.PRODUCT.INDEX} element={<Product />} />
-          <Route path={PATHS.PRODUCT.DETAIL} element={<ProductDetail />} />
 
           {/* Blog page */}
           <Route path={PATHS.BLOG.INDEX} element={<Blog />} />
           <Route path={PATHS.BLOG.DETAIL} element={<BlogDetail />} />
 
-          {/* Cart page */}
-          <Route path={PATHS.SHOPPING_CART} element={<Cart />} />
-          <Route path={PATHS.CHECKOUT.INDEX} element={<Checkout />} />
-          <Route path={PATHS.CHECKOUT.SUCCESS} element={<CheckoutSuccess />} />
+          {/* Private pages */}
+          <Route element={<PrivateRoute />}>
+            {/* Product  Detail */}
+            <Route path={PATHS.PRODUCT.DETAIL} element={<ProductDetail />} />
+
+            {/* Cart - Checkout - Checkout Success */}
+            <Route path={PATHS.SHOPPING_CART} element={<Cart />} />
+            <Route path={PATHS.CHECKOUT.INDEX} element={<Checkout />} />
+            <Route
+              path={PATHS.CHECKOUT.SUCCESS}
+              element={<CheckoutSuccess />}
+            />
+
+            {/* Profile */}
+            <Route path={PATHS.DASHBOARD.MY_ACCOUNT} element={<Dashboard />}>
+              {/* MyAccount */}
+              <Route index element={<MyAccount />} />
+
+              {/* MyAddress */}
+              {/* <Route
+                path={PATHS.DASHBOARD.MY_ADDRESS}
+                element={<MyAddress />}
+              /> */}
+
+              {/* MyOrders */}
+              {/* <Route path={PATHS.DASHBOARD.MY_ORDERS} element={<MyOrders />} /> */}
+
+              {/* MyWishlist */}
+              {/* <Route
+                path={PATHS.DASHBOARD.MY_WISHLIST}
+                element={<MyWishlist />}
+              /> */}
+            </Route>
+          </Route>
 
           {/* 404 page */}
           <Route path={PATHS.NOT_FOUND} element={<Page404 />} />
