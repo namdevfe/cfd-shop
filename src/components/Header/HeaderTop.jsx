@@ -1,6 +1,15 @@
-import React from "react";
+import { MODAL_TYPES } from "@/constants/general";
+import { useAuthContext } from "@/context/AuthContext";
 
 const HeaderTop = () => {
+  const { handleShowAuthModal } = useAuthContext();
+
+  const _onShowAuthModal = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+    handleShowAuthModal(MODAL_TYPES.LOGIN);
+  };
+
   return (
     <div className="header-top">
       <div className="container">
@@ -15,10 +24,10 @@ const HeaderTop = () => {
             <li>
               <a
                 href="#signin-modal"
-                data-toggle="modal"
                 className="top-menu-login"
+                onClick={_onShowAuthModal}
               >
-                <i className="icon-user"></i>Login | Resgister{" "}
+                <i className="icon-user"></i>Login | Resgister
               </a>
             </li>
           </ul>
