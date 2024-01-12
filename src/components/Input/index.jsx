@@ -26,6 +26,7 @@ export const InputM = (
           className={cn("form-control", {
             "input-error": !!error,
           })}
+          name={name}
           required={required}
           id={name}
           {...inputProps}
