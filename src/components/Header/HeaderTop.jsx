@@ -7,7 +7,7 @@ const HeaderTop = () => {
   const _onShowAuthModal = (e) => {
     e.stopPropagation();
     e.preventDefault();
-    handleShowAuthModal(MODAL_TYPES.LOGIN);
+    handleShowAuthModal?.(MODAL_TYPES.LOGIN);
   };
 
   return (
