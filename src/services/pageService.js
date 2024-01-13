@@ -1,10 +1,10 @@
 import axiosInstance from "@/utils/axiosInstance";
 
 export const pageService = {
-  getPages(query = "") {
+  getPageData(query = "") {
     return axiosInstance.get(`/pages/${query}`);
   },
-  searchByPage(page = "") {
-    return axiosInstance.get(`/pages/${page}`);
+  getPageDataByName(name, query = "") {
+    return axiosInstance.get(`/pages/${name}${query}`);
   },
 };

@@ -208,48 +208,48 @@ $(document).ready(function () {
   }
 
   // Product countdown
-  if ($.fn.countdown) {
-    $(".product-countdown").each(function () {
-      var $this = $(this),
-        untilDate = $this.data("until"),
-        compact = $this.data("compact"),
-        dateFormat = !$this.data("format") ? "DHMS" : $this.data("format"),
-        newLabels = !$this.data("labels-short")
-          ? ["Years", "Months", "Weeks", "Days", "Hours", "Minutes", "Seconds"]
-          : ["Years", "Months", "Weeks", "Days", "Hours", "Mins", "Secs"],
-        newLabels1 = !$this.data("labels-short")
-          ? ["Year", "Month", "Week", "Day", "Hour", "Minute", "Second"]
-          : ["Year", "Month", "Week", "Day", "Hour", "Min", "Sec"];
+  // if ($.fn.countdown) {
+  //   $(".product-countdown").each(function () {
+  //     var $this = $(this),
+  //       untilDate = $this.data("until"),
+  //       compact = $this.data("compact"),
+  //       dateFormat = !$this.data("format") ? "DHMS" : $this.data("format"),
+  //       newLabels = !$this.data("labels-short")
+  //         ? ["Years", "Months", "Weeks", "Days", "Hours", "Minutes", "Seconds"]
+  //         : ["Years", "Months", "Weeks", "Days", "Hours", "Mins", "Secs"],
+  //       newLabels1 = !$this.data("labels-short")
+  //         ? ["Year", "Month", "Week", "Day", "Hour", "Minute", "Second"]
+  //         : ["Year", "Month", "Week", "Day", "Hour", "Min", "Sec"];
 
-      var newDate;
+  //     var newDate;
 
-      // Split and created again for ie and edge
-      if (!$this.data("relative")) {
-        var untilDateArr = untilDate.split(", "), // data-until 2019, 10, 8 - yy,mm,dd
-          newDate = new Date(
-            untilDateArr[0],
-            untilDateArr[1] - 1,
-            untilDateArr[2]
-          );
-      } else {
-        newDate = untilDate;
-      }
+  //     // Split and created again for ie and edge
+  //     if (!$this.data("relative")) {
+  //       var untilDateArr = untilDate.split(", "), // data-until 2019, 10, 8 - yy,mm,dd
+  //         newDate = new Date(
+  //           untilDateArr[0],
+  //           untilDateArr[1] - 1,
+  //           untilDateArr[2]
+  //         );
+  //     } else {
+  //       newDate = untilDate;
+  //     }
 
-      $this.countdown({
-        until: newDate,
-        format: dateFormat,
-        padZeroes: true,
-        compact: compact,
-        compactLabels: ["y", "m", "w", " days,"],
-        timeSeparator: " : ",
-        labels: newLabels,
-        labels1: newLabels1,
-      });
-    });
+  //     $this.countdown({
+  //       until: newDate,
+  //       format: dateFormat,
+  //       padZeroes: true,
+  //       compact: compact,
+  //       compactLabels: ["y", "m", "w", " days,"],
+  //       timeSeparator: " : ",
+  //       labels: newLabels,
+  //       labels1: newLabels1,
+  //     });
+  //   });
 
-    // Pause
-    // $('.product-countdown').countdown('pause');
-  }
+  //   // Pause
+  //   // $('.product-countdown').countdown('pause');
+  // }
 
   // Quantity Input - Cart page - Product Details pages
   function quantityInputs() {
@@ -765,32 +765,32 @@ $(document).ready(function () {
   }
 
   // CONTDOWN HOME
-  if ($.fn.countdown) {
-    $(".deal-countdown").each(function () {
-      var $this = $(this),
-        untilDate = $this.data("until"),
-        compact = $this.data("compact");
+  // if ($.fn.countdown) {
+  //   $(".deal-countdown").each(function () {
+  //     var $this = $(this),
+  //       untilDate = $this.data("until"),
+  //       compact = $this.data("compact");
 
-      $this.countdown({
-        until: untilDate, // this is relative date +10h +5m vs..
-        format: "HMS",
-        padZeroes: true,
-        labels: [
-          "years",
-          "months",
-          "weeks",
-          "days",
-          "hours",
-          "minutes",
-          "seconds",
-        ],
-        labels1: ["year", "month", "week", "day", "hour", "minutes", "second"],
-      });
-    });
+  //     $this.countdown({
+  //       until: untilDate, // this is relative date +10h +5m vs..
+  //       format: "HMS",
+  //       padZeroes: true,
+  //       labels: [
+  //         "years",
+  //         "months",
+  //         "weeks",
+  //         "days",
+  //         "hours",
+  //         "minutes",
+  //         "seconds",
+  //       ],
+  //       labels1: ["year", "month", "week", "day", "hour", "minutes", "second"],
+  //     });
+  //   });
 
-    // Pause
-    // $('.deal-countdown').countdown('pause');
-  }
+  //   // Pause
+  //   $(".deal-countdown").countdown("pause");
+  // }
 
   // SELECTOR CITY
   var citis = document.getElementById("city");

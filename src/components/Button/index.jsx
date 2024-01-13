@@ -12,8 +12,12 @@ const Button = ({
   switch (variant) {
     case "primary":
       variantClass = "btn btn-primary";
+      break;
     case "outline":
       variantClass = "btn btn-outline-primary-2";
+      break;
+    case "outline-dark":
+      variantClass = "btn btn-outline-dark-2";
       break;
     default:
       break;

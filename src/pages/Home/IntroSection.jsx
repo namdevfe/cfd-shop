@@ -1,9 +1,10 @@
 import Button from "@/components/Button";
-import React, { useEffect } from "react";
 import { PATHS } from "@/constants/path";
 import owlCarousels from "@/utils/owlCarousel";
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
-const IntroSection = () => {
+const IntroSection = ({ introProducts }) => {
   useEffect(() => {
     owlCarousels();
   }, []);
@@ -86,61 +87,42 @@ const IntroSection = () => {
           </div>
           <div className="col-lg-4">
             <div className="intro-banners">
-              <div className="banner mb-lg-1 mb-xl-2">
-                <a href="#">
-                  <img
-                    src="/assets/images/demos/demo-3/banners/banner-1.jpg"
-                    alt="Banner"
-                  />
-                </a>
-                <div className="banner-content">
-                  <h3 className="banner-title">
-                    <a href="#">
-                      Edifier <br />
-                      Stereo Bluetooth{" "}
-                    </a>
-                  </h3>
-                  <a href="#" className="banner-link">
-                    Shop Now <i className="icon-long-arrow-right" />
-                  </a>
-                </div>
-              </div>
-              <div className="banner mb-lg-1 mb-xl-2">
-                <a href="#">
-                  <img
-                    src="/assets/images/demos/demo-3/banners/banner-2.jpg"
-                    alt="Banner"
-                  />
-                </a>
-                <div className="banner-content">
-                  <h3 className="banner-title">
-                    <a href="#">
-                      GoPro - Fusion 360 <span>Save $70</span>
-                    </a>
-                  </h3>
-                  <a href="#" className="banner-link">
-                    Shop Now <i className="icon-long-arrow-right" />
-                  </a>
-                </div>
-              </div>
-              <div className="banner mb-0">
-                <a href="#">
-                  <img
-                    src="/assets/images/demos/demo-3/banners/banner-3.jpg"
-                    alt="Banner"
-                  />
-                </a>
-                <div className="banner-content">
-                  <h3 className="banner-title">
-                    <a href="#">
-                      Apple Watch 4 <span>Our Hottest Deals</span>
-                    </a>
-                  </h3>
-                  <a href="#" className="banner-link">
-                    Shop Now <i className="icon-long-arrow-right" />
-                  </a>
-                </div>
-              </div>
+              {introProducts?.map((products, index) => {
+                const { id, images, title, slug } = products || {};
+                const productPath = PATHS.PRODUCT.INDEX + `/${slug}`;
+                return (
+                  <div
+                    key={id || index}
+                    className="banner mb-lg-1 mb-xl-2"
+                    style={{
+                      display: "flex",
+                      justifyContent: "flex-end",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Link to={productPath}>
+                      <img
+                        style={{
+                          height: 119,
+                          objectFit: "contain",
+                          objectPosition: "center right",
+                          opacity: 0.5,
+                        }}
+                        src={images?.[0] || ""}
+                        alt={title || ""}
+                      />
+                    </Link>
+                    <div className="banner-content">
+                      <h3 className="banner-title">
+                        <Link to={productPath}>{title || ""}</Link>
+                      </h3>
+                      <Link to={productPath} className="banner-link">
+                        Shop Now <i className="icon-long-arrow-right" />
+                      </Link>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
