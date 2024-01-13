@@ -9,9 +9,6 @@ const FeaturedSection = ({
   featureProducts,
   handleSelectCate,
 }) => {
-  // console.log("🚀featureProducts---->", featureProducts);
-  console.log("🚀selectedCateSlug---->", selectedCateSlug);
-  // console.log("🚀categories---->", categories);
   // Handle select category
   const _onSelectCate = (e, slug) => {
     e?.preventDefault();

@@ -1,10 +1,10 @@
 import axiosInstance from "@/utils/axiosInstance";
 
 export const subscribeService = {
-  subscribes(payload = {}) {
+  subscribe(payload = {}) {
     return axiosInstance.post("/subscribes", payload);
   },
-  deals(payload = {}) {
+  subscribeDeal(payload = {}) {
     return axiosInstance.post("/subscribes/deals", payload);
   },
 };

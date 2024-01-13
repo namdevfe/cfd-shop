@@ -1,6 +1,10 @@
+import { GENERAL_MESSAGE, HOME_MESSAGE } from "@/constants/message";
+import useMutation from "@/hooks/useMutation";
 import useQuery from "@/hooks/useQuery";
 import { pageService } from "@/services/pageService";
 import { productService } from "@/services/productService";
+import { subscribeService } from "@/services/subscribeService";
+import { message } from "antd";
 import { useState } from "react";
 
 const useHomePage = () => {
@@ -16,6 +20,13 @@ const useHomePage = () => {
   const { data: categoriesData, loading: categoriesLoading } = useQuery(
     productService.getCategories
   );
+
+  const {
+    data,
+    error,
+    loading,
+    execute: dealExecute,
+  } = useMutation(subscribeService.subscribeDeal);
 
   const products = productsData?.products || [];
   const featuredProducts = products?.filter((product) => product.featured);
@@ -65,8 +76,32 @@ const useHomePage = () => {
     handleSelectCate: (slug) => setSelectedCateSlug(slug),
   };
 
+  // Handle Service Section
+  const services = homeData?.data?.information || {};
+  const serviceProps = {
+    services,
+  };
+
   // Handle Loading
   const apiLoading = productsLoading || homeLoading || categoriesLoading;
+
+  const handleSubscribeDeal = (email, callback) => {
+    if (email) {
+      dealExecute(email, {
+        onSuccess: (data) => {
+          message.success(HOME_MESSAGE.dealSuccess);
+          callback?.();
+        },
+        onFail: (error) => {
+          message.error(GENERAL_MESSAGE.error);
+        },
+      });
+    }
+  };
+
+  const getDealProps = {
+    handleSubscribeDeal,
+  };
 
   return {
     introProps,
@@ -74,6 +109,8 @@ const useHomePage = () => {
     dealProps,
     brandProps,
     featuredProps,
+    serviceProps,
+    getDealProps,
     apiLoading,
   };
 };
