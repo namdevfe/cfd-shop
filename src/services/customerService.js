@@ -10,6 +10,9 @@ export const customerService = {
   updateProfile(payload = {}) {
     return axiosInstance.put("/customer/profiles", payload);
   },
+  getProfile() {
+    return axiosInstance.get("/customer/profiles");
+  },
   refreshToken(payload = {}) {
     return axiosInstance.put("/customer/refresh", payload);
   },

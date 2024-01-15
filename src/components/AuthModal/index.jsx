@@ -38,8 +38,8 @@ const AuthModal = () => {
                   <i className="icon-close" />
                 </span>
               </button>
-              <div className="form-box" style={{ position: "relative" }}>
-                <div className="form-tab">
+              <div className="form-box">
+                <div className="form-tab" style={{ position: "relative" }}>
                   <ul className="nav nav-pills nav-fill nav-border-anim">
                     <li className="nav-item">
                       <div

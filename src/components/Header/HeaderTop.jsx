@@ -3,12 +3,18 @@ import { useAuthContext } from "@/context/AuthContext";
 import tokenMethod from "@/utils/token";
 
 const HeaderTop = () => {
-  const { handleShowAuthModal } = useAuthContext();
+  const { handleShowAuthModal, handleLogout } = useAuthContext();
 
   const _onShowAuthModal = (e) => {
     e.stopPropagation();
     e.preventDefault();
     handleShowAuthModal?.(MODAL_TYPES.LOGIN);
+  };
+
+  const _onLogout = (e) => {
+    e?.preventDefault();
+    e?.stopPropagation();
+    handleLogout?.();
   };
 
   return (
@@ -42,7 +48,9 @@ const HeaderTop = () => {
                         </a>
                       </li>
                       <li>
-                        <a href="#">Sign Out</a>
+                        <a href="#" onClick={_onLogout}>
+                          Sign Out
+                        </a>
                       </li>
                     </ul>
                   </li>

@@ -1,12 +1,23 @@
+import { PATHS } from "@/constants/path";
 import { customerService } from "@/services/customerService";
 import tokenMethod from "@/utils/token";
 import { message } from "antd";
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const AuthContext = createContext({});
 
 const AuthContextProvider = ({ children }) => {
+  const navigate = useNavigate();
   const [showAuthModal, setShowAuthModal] = useState(""); // login || register || ""
+  const [profile, setProfile] = useState({});
+
+  useEffect(() => {
+    const accessToken = !!tokenMethod.get()?.accessToken;
+    if (accessToken) {
+      getProfile();
+    }
+  }, []);
 
   // Handle show auth modal
   const handleShowAuthModal = (modalType) => {
@@ -18,6 +29,18 @@ const AuthContextProvider = ({ children }) => {
     e?.preventDefault();
     e?.stopPropagation();
     setShowAuthModal("");
+  };
+
+  // Handle get profile
+  const getProfile = async () => {
+    try {
+      const res = await customerService.getProfile();
+      if (res?.data?.data) {
+        setProfile(res.data.data);
+      }
+    } catch (error) {
+      console.log("🚀error---->", error);
+    }
   };
 
   // Handle login
@@ -41,18 +64,62 @@ const AuthContextProvider = ({ children }) => {
         });
 
         // Handle get profile
+        getProfile();
 
         // Handle close modal & Notify success
         handleCloseAuthModal();
-        message.success("Đăng nhập thành công!");
+        message.success("Logged in successfully!");
       } else {
-        message.error("Đăng nhập thất bại!");
+        message.error("Login failed!");
       }
     } catch (error) {
-      message.error("Đăng nhập thất bại!");
+      message.error("Login failed!");
     } finally {
       callback?.();
     }
+  };
+
+  // Handle register
+  const handleRegister = async (registerData, callback) => {
+    const { email, password, isAgree } = registerData || {};
+    // Payload
+    const payload = {
+      firstName: "",
+      lastName: "",
+      email,
+      password,
+      isAgree,
+    };
+
+    // Call API
+    try {
+      const res = await customerService.register(payload);
+      if (res?.data?.data?.id) {
+        message.success("Register successfully!");
+        handleLogin({
+          email,
+          password,
+        });
+      }
+    } catch (error) {
+      if (error?.response?.status === 403) {
+        message.error("Registered account already exists");
+      } else {
+        message.error("Register failed!");
+      }
+    } finally {
+      callback?.();
+    }
+  };
+
+  // Handle logout
+  const handleLogout = () => {
+    // Remove token
+    tokenMethod.remove();
+    // Navigate to home page
+    navigate(PATHS.HOME);
+    // Notify
+    message.success("Account is logged out");
   };
 
   return (
@@ -62,6 +129,8 @@ const AuthContextProvider = ({ children }) => {
         handleShowAuthModal,
         handleCloseAuthModal,
         handleLogin,
+        handleRegister,
+        handleLogout,
       }}
     >
       {children}

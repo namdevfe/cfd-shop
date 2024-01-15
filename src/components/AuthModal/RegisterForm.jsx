@@ -4,20 +4,30 @@ import { MESSAGE, REGEX } from "@/constants/validate";
 import Button from "../Button";
 import { Link } from "react-router-dom";
 import { PATHS } from "@/constants/path";
+import { useAuthContext } from "@/context/AuthContext";
+import { useState } from "react";
+import ComponentLoading from "../ComponentLoading";
 
 const RegisterForm = () => {
+  const { handleRegister } = useAuthContext();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
+  const [loading, setLoading] = useState(false);
+
   const _onSubmit = (data) => {
-    console.log("🚀data---->", data);
+    if (data) {
+      setLoading(true);
+      handleRegister?.(data);
+    }
   };
 
   return (
     <form onSubmit={handleSubmit(_onSubmit)}>
+      {loading && <ComponentLoading />}
       <Input
         label="Your email address"
         required

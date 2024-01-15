@@ -61,7 +61,7 @@ function App() {
           <Route path={PATHS.BLOG.DETAIL} element={<BlogDetail />} />
 
           {/* Private pages */}
-          <Route element={<PrivateRoute />}>
+          <Route element={<PrivateRoute redirectPath="/" />}>
             {/* Product  Detail */}
             <Route path={PATHS.PRODUCT.DETAIL} element={<ProductDetail />} />
 
