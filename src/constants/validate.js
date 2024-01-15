@@ -1,6 +1,7 @@
 export const MESSAGE = {
   required: "Please enter your information",
   email: "Please enter your email with format abc@xyz.com",
+  password: "Please enter your password of at least 6 characters",
 };
 
 export const REGEX = {

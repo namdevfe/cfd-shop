@@ -47,4 +47,4 @@ const BrandSection = ({ brands }) => {
   );
 };
 
-export default BrandSection;
+export default React.memo(BrandSection);

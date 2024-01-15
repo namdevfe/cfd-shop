@@ -2,20 +2,34 @@ import { useForm } from "react-hook-form";
 import { MESSAGE, REGEX } from "@/constants/validate";
 import Button from "../Button";
 import { Input } from "../Input";
+import { useAuthContext } from "@/context/AuthContext";
+import ComponentLoading from "../ComponentLoading";
+import { useState } from "react";
 
 const LoginForm = () => {
+  const { handleLogin } = useAuthContext();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
+  const [loading, setLoading] = useState(false);
+
   const onSubmit = (data) => {
-    console.log("data", data);
+    if (data) {
+      setLoading(true);
+      handleLogin?.(data, () => {
+        setTimeout(() => {
+          setLoading(false);
+        }, 300);
+      });
+    }
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
+      {loading && <ComponentLoading />}
       {/* Username || Email */}
       <Input
         label="Username or email address"
