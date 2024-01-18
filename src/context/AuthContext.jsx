@@ -10,14 +10,14 @@ export const AuthContext = createContext({});
 const AuthContextProvider = ({ children }) => {
   const navigate = useNavigate();
   const [showAuthModal, setShowAuthModal] = useState(""); // login || register || ""
-  const [profile, setProfile] = useState({});
+  // const [profile, setProfile] = useState({});
 
-  useEffect(() => {
-    const accessToken = !!tokenMethod.get()?.accessToken;
-    if (accessToken) {
-      getProfile();
-    }
-  }, []);
+  // useEffect(() => {
+  //   const accessToken = !!tokenMethod.get()?.accessToken;
+  //   if (accessToken) {
+  //     getProfile();
+  //   }
+  // }, []);
 
   // Handle show auth modal
   const handleShowAuthModal = (modalType) => {
@@ -116,6 +116,7 @@ const AuthContextProvider = ({ children }) => {
   const handleLogout = () => {
     // Remove token
     tokenMethod.remove();
+    setProfile(null);
     // Navigate to home page
     navigate(PATHS.HOME);
     // Notify

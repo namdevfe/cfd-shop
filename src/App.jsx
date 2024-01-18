@@ -23,8 +23,25 @@ import MyAccount from "./pages/Dashboard/MyAccount";
 import MyWishlist from "./pages/Dashboard/MyWishlist";
 import MyAddress from "./pages/Dashboard/MyAddress";
 import MyOrders from "./pages/Dashboard/MyOrders";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { handleGetProfile } from "./store/reducers/authReducer";
+import { message } from "antd";
 
 function App() {
+  const dispatch = useDispatch();
+
+  // Config message antd
+  message.config({
+    top: 80,
+    duration: 3,
+    maxCount: 3,
+  });
+
+  useEffect(() => {
+    dispatch(handleGetProfile());
+  }, []);
+
   return (
     <BrowserRouter>
       <Routes>
@@ -55,16 +72,15 @@ function App() {
 
           {/* Products page */}
           <Route path={PATHS.PRODUCT.INDEX} element={<Product />} />
+          {/* Product  Detail */}
+          <Route path={PATHS.PRODUCT.DETAIL} element={<ProductDetail />} />
 
           {/* Blog page */}
           <Route path={PATHS.BLOG.INDEX} element={<Blog />} />
           <Route path={PATHS.BLOG.DETAIL} element={<BlogDetail />} />
 
           {/* Private pages */}
-          <Route element={<PrivateRoute redirectPath="/" />}>
-            {/* Product  Detail */}
-            <Route path={PATHS.PRODUCT.DETAIL} element={<ProductDetail />} />
-
+          <Route element={<PrivateRoute redirectPath={PATHS.HOME} />}>
             {/* Cart - Checkout - Checkout Success */}
             <Route path={PATHS.SHOPPING_CART} element={<Cart />} />
             <Route path={PATHS.CHECKOUT.INDEX} element={<Checkout />} />

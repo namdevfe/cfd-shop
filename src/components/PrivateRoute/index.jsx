@@ -1,19 +1,20 @@
 import { MODAL_TYPES } from "@/constants/general";
-import { useAuthContext } from "@/context/AuthContext";
+import { handleShowAuthModal } from "@/store/reducers/authReducer";
 import tokenMethod from "@/utils/token";
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { Navigate, Outlet, useNavigate } from "react-router-dom";
 
 const PrivateRoute = ({ redirectPath = "" }) => {
-  const { handleShowAuthModal } = useAuthContext();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const isLogin = !!tokenMethod.get();
 
   useEffect(() => {
     if (!isLogin) {
-      handleShowAuthModal?.(MODAL_TYPES.LOGIN);
+      dispatch(handleShowAuthModal(MODAL_TYPES.LOGIN));
     }
-  }, [handleShowAuthModal]);
+  }, []);
 
   if (!isLogin) {
     if (!!redirectPath) {

@@ -1,7 +1,7 @@
+import React, { useEffect } from "react";
 import ProductCard from "@/components/ProductCard";
 import cn from "@/utils/cn";
 import owlCarousels from "@/utils/owlCarousel";
-import React, { useEffect } from "react";
 
 const FeaturedSection = ({
   categories,
@@ -52,7 +52,6 @@ const FeaturedSection = ({
       </div>
       <div className="tab-content tab-content-carousel just-action-icons-sm">
         <div
-          // className="tab-pane p-0 fade show active"
           className={cn("tab-pane p-0 fade", {
             "show active": featureProducts?.length > 0,
           })}

@@ -10,16 +10,14 @@ import AuthContextProvider from "@/context/AuthContext";
 const MainLayout = () => {
   return (
     <MainContextProvider>
-      <AuthContextProvider>
-        <div className="page-wrapper">
-          <Header />
-          <Outlet />
-          <Footer />
-        </div>
-        <ScrollToTop />
-        <MenuMobile />
-        <Modal />
-      </AuthContextProvider>
+      <div className="page-wrapper">
+        <Header />
+        <Outlet />
+        <Footer />
+      </div>
+      <ScrollToTop />
+      <MenuMobile />
+      <Modal />
     </MainContextProvider>
   );
 };

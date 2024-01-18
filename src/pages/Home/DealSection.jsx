@@ -9,10 +9,11 @@ import { Link } from "react-router-dom";
 
 const DealSection = ({ dealProducts }) => {
   const targetTime = moment()
-    .add(1, "today")
+    .add(1, "day")
     .set({ hour: 17, minute: 0, second: 0, milisecond: 0 }); // 5pm tomorrow
 
   const dealOfTheDayProduct = dealProducts?.[0];
+  2;
 
   return (
     <div className="bg-light deal-container pt-7 pb-7 mb-5">

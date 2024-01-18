@@ -27,24 +27,27 @@ axiosInstance.interceptors.response.use(
     const originalRequest = error.config;
     if (
       (error.response?.status === 403 || error.response?.status === 401) &&
-      !!!originalRequest._retry
+      !!!originalRequest._retry &&
+      !!tokenMethod.get()
     ) {
       originalRequest._retry = true;
 
       // Call API refresh token
       try {
-        const { tokenData } = await customerService.refreshToken(
-          tokenMethod.get?.(refreshToken)
-        );
-        console.log("🚀res---->", res);
+        const res = await customerService.refreshToken({
+          refreshToken: tokenMethod.get()?.refreshToken,
+        });
+
+        const { token: accessToken, refreshToken } = res?.data?.data || {};
+
         // Save token to client-storage
         tokenMethod.set({
-          accessToken: tokenData?.token,
-          refreshToken: tokenData?.refreshToken,
+          accessToken,
+          refreshToken,
         });
 
         // Config original request
-        originalRequest.headers.Authorization = `Bearer ${tokenData?.token}`;
+        originalRequest.headers.Authorization = `Bearer ${accessToken}`;
         return axiosInstance(originalRequest);
       } catch (error) {
         // Handle error

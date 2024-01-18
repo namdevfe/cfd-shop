@@ -4,20 +4,32 @@ import cn from "@/utils/cn";
 import styled from "styled-components";
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  handleCloseAuthModal,
+  handleShowAuthModal,
+} from "@/store/reducers/authReducer";
 
 const AuthModalContainer = styled.div`
   display: ${(props) => (props?.$isShow ? "block" : "none")};
 `;
 
 const AuthModal = () => {
-  const { showAuthModal, handleShowAuthModal, handleCloseAuthModal } =
-    useAuthContext();
+  const { showAuthModal } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
 
-  const _onShowModal = (e, modalType) => {
-    e.preventDefault();
-    e.stopPropagation();
-    handleShowAuthModal?.(modalType);
+  const _onTabChange = (e, tab) => {
+    e?.preventDefault();
+    e?.stopPropagation();
+    dispatch(handleShowAuthModal(tab));
   };
+
+  const _onCloseModal = (e) => {
+    e?.preventDefault();
+    e?.stopPropagation();
+    dispatch(handleCloseAuthModal());
+  };
+
   return (
     <>
       <AuthModalContainer
@@ -29,11 +41,7 @@ const AuthModal = () => {
         <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content">
             <div className="modal-body">
-              <button
-                type="button"
-                className="close"
-                onClick={handleCloseAuthModal}
-              >
+              <button type="button" className="close" onClick={_onCloseModal}>
                 <span>
                   <i className="icon-close" />
                 </span>
@@ -47,7 +55,7 @@ const AuthModal = () => {
                           active: showAuthModal === MODAL_TYPES.LOGIN,
                         })}
                         style={{ cursor: "pointer" }}
-                        onClick={(e) => _onShowModal(e, MODAL_TYPES.LOGIN)}
+                        onClick={(e) => _onTabChange(e, MODAL_TYPES.LOGIN)}
                       >
                         Sign In
                       </div>
@@ -58,7 +66,7 @@ const AuthModal = () => {
                           active: showAuthModal === MODAL_TYPES.REGISTER,
                         })}
                         style={{ cursor: "pointer" }}
-                        onClick={(e) => _onShowModal(e, MODAL_TYPES.REGISTER)}
+                        onClick={(e) => _onTabChange(e, MODAL_TYPES.REGISTER)}
                       >
                         Register
                       </div>
@@ -89,7 +97,7 @@ const AuthModal = () => {
           <div
             style={{ zIndex: -1 }}
             className={cn("modal-backdrop", { "fade show": !!showAuthModal })}
-            onClick={handleCloseAuthModal}
+            onClick={_onCloseModal}
           />
         )}
       </AuthModalContainer>

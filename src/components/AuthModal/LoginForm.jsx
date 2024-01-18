@@ -5,31 +5,37 @@ import { Input } from "../Input";
 import { useAuthContext } from "@/context/AuthContext";
 import ComponentLoading from "../ComponentLoading";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { handleLogin } from "@/store/reducers/authReducer";
+import useDebounce from "@/hooks/useDebounce";
+import { render } from "react-dom";
 
 const LoginForm = () => {
-  const { handleLogin } = useAuthContext();
+  const dispatch = useDispatch();
+  const { loading } = useSelector((state) => state.auth);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const [loading, setLoading] = useState(false);
-
-  const onSubmit = (data) => {
-    if (data) {
-      setLoading(true);
-      handleLogin?.(data, () => {
-        setTimeout(() => {
-          setLoading(false);
-        }, 300);
-      });
+  // Handle submit
+  const onSubmit = async (data) => {
+    if (data && !loading.login) {
+      try {
+        const res = await dispatch(handleLogin(data)).unwrap();
+      } catch (error) {
+        console.log("🚀error---->", error);
+      }
     }
   };
 
+  const renderLoading = useDebounce(loading.login, 300);
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      {loading && <ComponentLoading />}
+      {renderLoading && <ComponentLoading />}
       {/* Username || Email */}
       <Input
         label="Username or email address"

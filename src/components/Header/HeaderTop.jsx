@@ -1,20 +1,30 @@
 import { MODAL_TYPES } from "@/constants/general";
-import { useAuthContext } from "@/context/AuthContext";
+import { PATHS } from "@/constants/path";
+import {
+  handleLogout,
+  handleShowAuthModal,
+} from "@/store/reducers/authReducer";
 import tokenMethod from "@/utils/token";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const HeaderTop = () => {
-  const { handleShowAuthModal, handleLogout } = useAuthContext();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { profile } = useSelector((state) => state.auth);
+  const { firstName, email } = profile || {};
 
   const _onShowAuthModal = (e) => {
-    e.stopPropagation();
-    e.preventDefault();
-    handleShowAuthModal?.(MODAL_TYPES.LOGIN);
+    e?.stopPropagation();
+    e?.preventDefault();
+    dispatch(handleShowAuthModal(MODAL_TYPES.LOGIN));
   };
 
   const _onLogout = (e) => {
     e?.preventDefault();
     e?.stopPropagation();
-    handleLogout?.();
+    dispatch(handleLogout());
+    navigate(PATHS.HOME);
   };
 
   return (
@@ -31,7 +41,7 @@ const HeaderTop = () => {
               <li>
                 <a href="#" className="top-link-menu">
                   <i className="icon-user" />
-                  Tran Nghia{" "}
+                  {firstName || email || "Default"}
                 </a>
                 <ul>
                   <li>

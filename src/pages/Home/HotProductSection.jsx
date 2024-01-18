@@ -1,7 +1,7 @@
 import ProductCard from "@/components/ProductCard";
 import cn from "@/utils/cn";
 import owlCarousels from "@/utils/owlCarousel";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 const TABS = {
   featured: "Featured",
