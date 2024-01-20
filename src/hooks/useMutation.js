@@ -2,12 +2,12 @@ import { useState } from "react";
 
 const useMutation = (promise) => {
   const [data, setData] = useState();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState();
 
   const execute = async (payload, options) => {
     const { onSuccess, onFail } = options || {};
-    setLoading(true);
+    // setLoading(true);
     try {
       const res = await promise(payload);
       if (res.data) {

@@ -28,7 +28,7 @@ const ProductCard = ({ product }) => {
         {discount > 0 && (
           <span className="product-label label-circle label-sale">Sale</span>
         )}
-        <Link to={productPath}>
+        <Link to={productPath} style={{ width: "100%", height: "100%" }}>
           {images?.length > 0 ? (
             <img
               src={images[0]}
@@ -99,7 +99,7 @@ const ProductCard = ({ product }) => {
               style={{ width: `${(rating || 0) * 20}%` }}
             />
           </div>
-          <span className="ratings-text">( {rating} Reviews )</span>
+          <span className="ratings-text">( {Math.ceil(rating)} Reviews )</span>
         </div>
       </div>
     </div>

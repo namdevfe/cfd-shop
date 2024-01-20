@@ -1,30 +1,55 @@
+import { Input } from "@/components/Input";
+import Select from "@/components/Select";
+import { SORT_OPTIONS } from "@/constants/general";
 import React from "react";
+import styled from "styled-components";
 
-const ProductToolbox = () => {
+const ToolboxRightWrapper = styled.div`
+  .form-group {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+`;
+
+const ProductToolbox = ({ showNumb, totalNumb, activeSort, onSortChange }) => {
+  const onSelectChange = (e) => {
+    onSortChange?.(e.target.value);
+  };
+
   return (
     <div className="toolbox">
       <div className="toolbox-left">
         <div className="toolbox-info">
-          {" "}
-          Showing <span>9 of 56</span> Products{" "}
+          Showing{" "}
+          <span>
+            {showNumb || 0} of {totalNumb || 0}
+          </span>{" "}
+          Products
         </div>
       </div>
-      <div className="toolbox-right">
-        <div className="toolbox-sort">
-          <label htmlFor="sortby">Sort by:</label>
-          <div className="select-custom">
-            <select name="sortby" id="sortby" className="form-control">
-              <option value="popularity" selected>
-                Most Popular
-              </option>
-              <option value="pricelow">Price Low to High</option>
-              <option value="pricehight">Price Hight to Low </option>
-              <option value="newest">Newest</option>
-              <option value="rating">Most Rated</option>
-            </select>
-          </div>
-        </div>
-      </div>
+      <ToolboxRightWrapper>
+        <Input
+          label="Sort by:"
+          className="toolbox-sort"
+          renderInput={(inputProps) => {
+            return (
+              <Select
+                options={[
+                  SORT_OPTIONS.popularity,
+                  SORT_OPTIONS.pricelow,
+                  SORT_OPTIONS.pricehigh,
+                  SORT_OPTIONS.newest,
+                  SORT_OPTIONS.rating,
+                ]}
+                {...inputProps}
+                value={activeSort}
+                onChange={onSelectChange}
+              />
+            );
+          }}
+        />
+      </ToolboxRightWrapper>
     </div>
   );
 };

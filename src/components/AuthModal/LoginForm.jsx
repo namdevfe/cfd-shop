@@ -1,14 +1,10 @@
-import { useForm } from "react-hook-form";
 import { MESSAGE, REGEX } from "@/constants/validate";
-import Button from "../Button";
-import { Input } from "../Input";
-import { useAuthContext } from "@/context/AuthContext";
-import ComponentLoading from "../ComponentLoading";
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { handleLogin } from "@/store/reducers/authReducer";
-import useDebounce from "@/hooks/useDebounce";
-import { render } from "react-dom";
+import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import Button from "../Button";
+import ComponentLoading from "../ComponentLoading";
+import { Input } from "../Input";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -31,11 +27,9 @@ const LoginForm = () => {
     }
   };
 
-  const renderLoading = useDebounce(loading.login, 300);
-
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      {renderLoading && <ComponentLoading />}
+      {loading.login && <ComponentLoading />}
       {/* Username || Email */}
       <Input
         label="Username or email address"

@@ -1,15 +1,15 @@
 import Breadcrumb from "@/components/Breadcrumb";
+import Pagination from "@/components/Pagination";
 import { PATHS } from "@/constants/path";
-import React from "react";
 import { Link } from "react-router-dom";
 import ProductFilter from "./ProductFilter";
-import ProductToolbox from "./ProductToolbox";
 import ProductList from "./ProductList";
-import Pagination from "@/components/Pagination";
+import ProductToolbox from "./ProductToolbox";
 import useProductPage from "./useProductPage";
 
 const Product = () => {
-  const { productListProps } = useProductPage();
+  const { productListProps, pagiProps, toolboxProps, filterProps } =
+    useProductPage();
 
   return (
     <main className="main">
@@ -36,11 +36,11 @@ const Product = () => {
         <div className="container">
           <div className="row">
             <div className="col-lg-9">
-              <ProductToolbox />
+              <ProductToolbox {...toolboxProps} />
               <ProductList {...productListProps} />
-              <Pagination />
+              <Pagination {...pagiProps} />
             </div>
-            <ProductFilter />
+            <ProductFilter {...filterProps} />
           </div>
         </div>
       </div>

@@ -9,12 +9,13 @@ export const InputM = (
     htmlFor,
     name,
     renderInput = undefined,
+    className,
     ...inputProps
   },
   ref
 ) => {
   return (
-    <div className="form-group">
+    <div className={`form-group ${className || ""}`}>
       {!!label && (
         <label htmlFor={name}>
           {label} {required ? "*" : ""}

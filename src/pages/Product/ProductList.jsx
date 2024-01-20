@@ -1,7 +1,6 @@
 import ProductCard from "@/components/ProductCard";
 import useDebounce from "@/hooks/useDebounce";
 import { Empty, Skeleton } from "antd";
-import React from "react";
 import styled from "styled-components";
 
 const ProductSkeletonStyle = styled.div`
@@ -11,11 +10,8 @@ const ProductSkeletonStyle = styled.div`
 `;
 
 const ProductList = ({ products, isError, isLoading }) => {
-  console.log("🚀isLoading---->", isLoading);
-  const apiLoading = useDebounce(isLoading, 5000);
-
   // Case: No data || Error
-  if ((!apiLoading && products?.length < 1) || isError) {
+  if ((!isLoading && products?.length < 1) || isError) {
     return (
       <div className="products mb-3">
         <div className="row justify-content-center">
@@ -26,11 +22,11 @@ const ProductList = ({ products, isError, isLoading }) => {
   }
 
   // Handle Skeleton Loading when calling API
-  if (apiLoading) {
+  if (isLoading) {
     return (
       <div className="products mb-3">
         <div className="row justify-content-center">
-          {new Array(3).fill("").map((_, index) => (
+          {new Array(9).fill("").map((_, index) => (
             <ProductSkeletonStyle
               key={index}
               className="col-6 col-md-4 col-lg-4"
