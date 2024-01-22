@@ -66,6 +66,7 @@ const ProductCard = ({ product }) => {
         <h3 className="product-title">
           <Link
             style={{
+              height: 60,
               display: "-webkit-inline-box",
               WebkitLineClamp: 3,
               WebkitBoxOrient: "vertical",

@@ -5,12 +5,12 @@ const useQuery = (promise, dependencies = []) => {
   const [error, setError] = useState();
   const [data, setData] = useState();
 
-  const fetchData = async () => {
+  const fetchData = async (query) => {
     setLoading(true);
     try {
-      const res = await promise?.();
+      const res = await promise(query);
       if (res?.data?.data) {
-        setData(res.data.data);
+        setData(res.data.data || []);
       }
     } catch (error) {
       setError(error);

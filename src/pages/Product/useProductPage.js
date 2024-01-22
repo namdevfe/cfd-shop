@@ -50,8 +50,10 @@ const useProductPage = () => {
     scrollTop();
   }, [search]);
 
+  const productListLoading = useDebounce(productsLoading, 2000);
+
   const productListProps = {
-    isLoading: productsLoading,
+    isLoading: productListLoading,
     isError: !!productsError,
     products,
   };

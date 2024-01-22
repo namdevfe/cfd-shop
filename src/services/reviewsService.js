@@ -1,8 +1,8 @@
 import axiosInstance from "@/utils/axiosInstance";
 
 export const reviewsService = {
-  getReviewsByProductId(id = "") {
-    return axiosInstance.get(`/reviews/product/${id}`);
+  getReviewsByProductId(id = "", query = "") {
+    return axiosInstance.get(`/reviews/product/${id}${query}`);
   },
   review(payload = {}) {
     return axiosInstance.post("/reviews", payload);

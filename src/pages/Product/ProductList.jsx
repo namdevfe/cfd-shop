@@ -1,6 +1,7 @@
 import ProductCard from "@/components/ProductCard";
 import useDebounce from "@/hooks/useDebounce";
 import { Empty, Skeleton } from "antd";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 const ProductSkeletonStyle = styled.div`
