@@ -3,7 +3,7 @@ $(document).ready(function () {
   "use strict";
 
   // owlCarousels();
-  quantityInputs();
+  // quantityInputs();
 
   // Header Search Toggle
 
@@ -252,17 +252,17 @@ $(document).ready(function () {
   // }
 
   // Quantity Input - Cart page - Product Details pages
-  function quantityInputs() {
-    if ($.fn.inputSpinner) {
-      $("input[type='number']").inputSpinner({
-        decrementButton: '<i class="icon-minus"></i>',
-        incrementButton: '<i class="icon-plus"></i>',
-        groupClass: "input-spinner",
-        buttonsClass: "btn-spinner",
-        buttonsWidth: "26px",
-      });
-    }
-  }
+  // function quantityInputs() {
+  //   if ($.fn.inputSpinner) {
+  //     $("input[type='number']").inputSpinner({
+  //       decrementButton: '<i class="icon-minus"></i>',
+  //       incrementButton: '<i class="icon-plus"></i>',
+  //       groupClass: "input-spinner",
+  //       buttonsClass: "btn-spinner",
+  //       buttonsWidth: "26px",
+  //     });
+  //   }
+  // }
 
   // Sticky Content - Sidebar - Social Icons etc..
   // Wrap elements with <div class="sticky-content"></div> if you want to make it sticky
@@ -842,9 +842,9 @@ $(document).ready(function () {
   }
 
   // Select Colors
-  let itemColor = $(".product-nav-dots .product-nav-item");
-  itemColor.on("click", function () {
-    itemColor.removeClass("active");
-    $(this).addClass("active");
-  });
+  // let itemColor = $(".product-nav-dots .product-nav-item");
+  // itemColor.on("click", function () {
+  //   itemColor.removeClass("active");
+  //   $(this).addClass("active");
+  // });
 });

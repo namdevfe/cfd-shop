@@ -1,6 +1,7 @@
 import useQuery from "@/hooks/useQuery";
 import { productService } from "@/services/productService";
 import { reviewsService } from "@/services/reviewsService";
+import { message } from "antd";
 import { useRef } from "react";
 import { useParams } from "react-router-dom";
 
@@ -16,7 +17,7 @@ const useProductDetailPage = () => {
     [productSlug]
   );
 
-  const { id, name } = productDetailData || {};
+  const { id, name, description, shippingReturn } = productDetailData || {};
 
   const { data: productDetailReviews } = useQuery(
     () => id && reviewsService.getReviewsByProductId(id),
@@ -24,7 +25,24 @@ const useProductDetailPage = () => {
   );
 
   const handleAddToCart = () => {
-    console.log("handleAddToCard");
+    const { value: color, reset: colorReset } = colorRef.current || {};
+    const { value: quantity, reset: quantityReset } = quantityRef.current || {};
+
+    if (!color) {
+      message.error("Please select color!");
+    }
+
+    if (isNaN(quantity) && quantity < 1) {
+      message.error("Quantity must be greater than 1!");
+    }
+
+    console.log("color", color);
+    console.log("quantity", quantity);
+
+    // Call API
+
+    colorReset?.();
+    quantityReset?.();
   };
 
   const handleAddToWishList = () => {
@@ -41,7 +59,11 @@ const useProductDetailPage = () => {
     handleAddToWishList,
   };
 
-  const productDetailTabProps = {};
+  const productDetailTabProps = {
+    description,
+    shippingReturn,
+    reviews: productDetailReviews,
+  };
 
   return {
     productName: name,

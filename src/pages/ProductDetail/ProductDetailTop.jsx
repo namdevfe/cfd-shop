@@ -1,5 +1,7 @@
 import ProductCorlor from "@/components/ProductColor";
 import ProductImageZoom from "@/components/ProductImageZoom";
+import QuantityInput from "@/components/QuantityInput";
+import QuantityInpu from "@/components/QuantityInput";
 import ShareLink from "@/components/ShareLink";
 import { PATHS } from "@/constants/path";
 import { formatCurrency, transformNumberToPercent } from "@/utils/format";
@@ -15,6 +17,7 @@ const ProductDetailTop = ({
   description,
   color,
   category,
+  stock,
   colorRef,
   quantityRef,
   handleAddToCart,
@@ -77,17 +80,7 @@ const ProductDetailTop = ({
           <div className="details-filter-row details-row-size">
             <label htmlFor="qty">Qty:</label>
             <div className="product-details-quantity">
-              <input
-                type="number"
-                id="qty"
-                className="form-control"
-                defaultValue={1}
-                min={1}
-                max={10}
-                step={1}
-                data-decimals={0}
-                required
-              />
+              <QuantityInput max={stock} ref={quantityRef} />
             </div>
           </div>
           <div className="product-details-action">
