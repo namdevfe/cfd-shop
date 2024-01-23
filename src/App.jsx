@@ -23,10 +23,12 @@ import MyAccount from "./pages/Dashboard/MyAccount";
 import MyWishlist from "./pages/Dashboard/MyWishlist";
 import MyAddress from "./pages/Dashboard/MyAddress";
 import MyOrders from "./pages/Dashboard/MyOrders";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { handleGetProfile } from "./store/reducers/authReducer";
 import { message } from "antd";
+import tokenMethod from "./utils/token";
+import { handleGetCart } from "./store/reducers/cartReducer";
 
 function App() {
   const dispatch = useDispatch();
@@ -39,7 +41,12 @@ function App() {
   });
 
   useEffect(() => {
-    dispatch(handleGetProfile());
+    if (tokenMethod.get()) {
+      // Handle Get Profile
+      dispatch(handleGetProfile());
+      // Handle Get Cart
+      dispatch(handleGetCart());
+    }
   }, []);
 
   return (

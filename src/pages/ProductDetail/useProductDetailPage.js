@@ -1,8 +1,10 @@
 import useQuery from "@/hooks/useQuery";
 import { productService } from "@/services/productService";
 import { reviewsService } from "@/services/reviewsService";
+import { handleAddCart } from "@/store/reducers/cartReducer";
 import { message } from "antd";
 import { useRef } from "react";
+import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 
 const useProductDetailPage = () => {
@@ -10,6 +12,7 @@ const useProductDetailPage = () => {
   const { productSlug } = useParams();
   const colorRef = useRef();
   const quantityRef = useRef();
+  const dispatch = useDispatch();
 
   // Fetch data
   const { data: productDetailData } = useQuery(
@@ -17,32 +20,46 @@ const useProductDetailPage = () => {
     [productSlug]
   );
 
-  const { id, name, description, shippingReturn } = productDetailData || {};
+  const { id, name, description, shippingReturn, price, discount } =
+    productDetailData || {};
 
   const { data: productDetailReviews } = useQuery(
     () => id && reviewsService.getReviewsByProductId(id),
     [id]
   );
 
-  const handleAddToCart = () => {
+  const handleAddToCart = async () => {
     const { value: color, reset: colorReset } = colorRef.current || {};
     const { value: quantity, reset: quantityReset } = quantityRef.current || {};
 
     if (!color) {
       message.error("Please select color!");
+      return;
     }
 
     if (isNaN(quantity) && quantity < 1) {
       message.error("Quantity must be greater than 1!");
+      return;
     }
 
-    console.log("color", color);
-    console.log("quantity", quantity);
+    const addPayload = {
+      addedId: id,
+      addedColor: color,
+      addedQuantity: quantity,
+      addedPrice: price - discount,
+    };
 
     // Call API
-
-    colorReset?.();
-    quantityReset?.();
+    try {
+      const res = await dispatch(handleAddCart(addPayload)).unwrap();
+      console.log("res", res);
+      if (res) {
+        colorReset?.();
+        quantityReset?.();
+      }
+    } catch (error) {
+      console.log("🚀error---->", error);
+    }
   };
 
   const handleAddToWishList = () => {

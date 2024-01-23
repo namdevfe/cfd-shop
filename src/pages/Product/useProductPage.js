@@ -20,6 +20,15 @@ const useProductPage = () => {
   // Change content queryString
   const [_, setSearchParams] = useSearchParams();
 
+  // Cache queryString
+  const queryObjectRef = useRef();
+
+  useEffect(() => {
+    if (queryObject) {
+      queryObjectRef.current = queryObject;
+    }
+  }, [queryObject]);
+
   // API Handling
   // API Products
   const {
@@ -143,7 +152,7 @@ const useProductPage = () => {
       // Update queryString
       priceFilterTimeout.current = setTimeout(() => {
         updateQueryString({
-          ...queryObject,
+          ...queryObjectRef.current,
           minPrice: priceRange[0].substring(1),
           maxPrice: priceRange[1].substring(1),
           page: 1,

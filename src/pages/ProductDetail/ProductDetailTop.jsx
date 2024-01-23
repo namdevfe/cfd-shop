@@ -1,7 +1,6 @@
 import ProductCorlor from "@/components/ProductColor";
 import ProductImageZoom from "@/components/ProductImageZoom";
 import QuantityInput from "@/components/QuantityInput";
-import QuantityInpu from "@/components/QuantityInput";
 import ShareLink from "@/components/ShareLink";
 import { PATHS } from "@/constants/path";
 import { formatCurrency, transformNumberToPercent } from "@/utils/format";
@@ -101,7 +100,11 @@ const ProductDetailTop = ({
           <div className="product-details-footer">
             <div className="product-cat">
               <span>Category:</span>{" "}
-              <Link to={categoryPath}>{category?.name}</Link>
+              <Link to={categoryPath}>
+                <span style={{ fontWeight: "400", color: "#777" }}>
+                  {category?.name}
+                </span>
+              </Link>
             </div>
             <div className="social-icons social-icons-sm" style={{ gap: 5 }}>
               <span className="social-label">Share:</span>

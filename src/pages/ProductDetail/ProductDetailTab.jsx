@@ -10,7 +10,6 @@ const TABS = {
 };
 
 const ProductDetailTab = ({ description, shippingReturn, reviews }) => {
-  console.log("🚀reviews---->", reviews);
   const [selectedTab, setSelectedTab] = useState(TABS.desc);
 
   const _onTabChange = (e, tab) => {
