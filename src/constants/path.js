@@ -27,10 +27,10 @@ export const PATHS = {
   },
 
   // Checkout
-  CHECKOUT: {
-    INDEX: CHECKOUT_PATH,
-    SUCCESS: CHECKOUT_PATH + "/checkout-success",
-  },
+  CHECKOUT: "/checkout",
+
+  // Checkout Success
+  CHECKOUT_SUCCESS: "/checkout-success",
 
   // Dashboard
   DASHBOARD: {

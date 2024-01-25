@@ -40,7 +40,7 @@ const QuantityInput = (
   });
 
   useEffect(() => {
-    onChange?.();
+    onChange?.(currentQuantity);
   }, [currentQuantity]);
 
   const _onDecrease = () => {
@@ -49,7 +49,15 @@ const QuantityInput = (
   };
 
   const _onInputChange = (e) => {
-    setCurrentQuantity(modifyValue(Number(e.target.value)));
+    setCurrentQuantity(
+      e.target.value !== "" ? modifyValue(Number(e.target.value)) : ""
+    );
+  };
+
+  const _onInputBlur = () => {
+    if (currentQuantity === "") {
+      setCurrentQuantity(defaultValue);
+    }
   };
 
   const _onIncrease = () => {
@@ -89,6 +97,7 @@ const QuantityInput = (
           max={max}
           value={currentQuantity}
           onChange={_onInputChange}
+          onBlur={_onInputBlur}
           {...inputProps}
         />
 

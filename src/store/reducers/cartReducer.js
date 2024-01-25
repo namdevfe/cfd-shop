@@ -55,6 +55,17 @@ const cartSlice = createSlice({
     builder.addCase(handleRemoveFromCart.rejected, (state) => {
       state.cartLoading = false;
     });
+
+    // UPDATE CART
+    builder.addCase(handleUpdateCart.pending, (state) => {
+      state.cartLoading = true;
+    });
+    builder.addCase(handleUpdateCart.fulfilled, (state) => {
+      state.cartLoading = false;
+    });
+    builder.addCase(handleUpdateCart.rejected, (state) => {
+      state.cartLoading = false;
+    });
   },
 });
 
@@ -111,7 +122,8 @@ export const handleAddCart = createAsyncThunk(
               Number(newQuantity[matchIndex]) + Number(addedQuantity);
 
             newTotalProduct[matchIndex] =
-              Number(newTotalProduct[matchIndex]) + addedPrice * addedQuantity;
+              Number(newTotalProduct[matchIndex]) +
+              Number(addedPrice) * Number(addedQuantity);
           } else {
             // Case 3: Duplicate product id but different variant
             newProduct.push(addedId);
@@ -225,6 +237,27 @@ export const handleRemoveFromCart = createAsyncThunk(
       rejectWithValue(error?.response?.data);
       message.error("Remove from cart failedd");
       console.log("🚀error---->", error);
+    }
+  }
+);
+
+// Habdle Update Cart
+export const handleUpdateCart = createAsyncThunk(
+  "cart/handleUpdateCart",
+  async (payload, thunkApi) => {
+    const { rejectWithValue, dispatch } = thunkApi;
+    try {
+      const cartRes = await cartService.updateCart(payload);
+      if (cartRes?.data?.data) {
+        dispatch(handleGetCart());
+      }
+      message.success("Update cart successfully");
+      return cartRes?.data?.data;
+    } catch (error) {
+      rejectWithValue(error);
+      message.error("Update cart failed");
+      console.log("🚀error---->", error);
+      throw error;
     }
   }
 );

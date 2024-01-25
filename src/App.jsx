@@ -102,19 +102,19 @@ function App() {
               <Route index element={<MyAccount />} />
 
               {/* MyAddress */}
-              {/* <Route
+              <Route
                 path={PATHS.DASHBOARD.MY_ADDRESS}
                 element={<MyAddress />}
-              /> */}
+              />
 
               {/* MyOrders */}
-              {/* <Route path={PATHS.DASHBOARD.MY_ORDERS} element={<MyOrders />} /> */}
+              <Route path={PATHS.DASHBOARD.MY_ORDERS} element={<MyOrders />} />
 
               {/* MyWishlist */}
-              {/* <Route
+              <Route
                 path={PATHS.DASHBOARD.MY_WISHLIST}
                 element={<MyWishlist />}
-              /> */}
+              />
             </Route>
           </Route>
 

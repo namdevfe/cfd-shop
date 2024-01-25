@@ -30,3 +30,23 @@ export const SORT_OPTIONS = {
     queryObject: { orderBy: "rating", order: "-1" },
   },
 };
+
+export const SHIPPING_OPTIONS = [
+  {
+    label: "Free Shipping",
+    value: "freeshipping",
+    price: 0,
+  },
+
+  {
+    label: "Standard",
+    value: "standard",
+    price: 10,
+  },
+
+  {
+    label: "Express",
+    value: "express",
+    price: 20,
+  },
+];

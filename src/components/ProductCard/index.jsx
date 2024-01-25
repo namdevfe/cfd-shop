@@ -1,7 +1,9 @@
 import { PATHS } from "@/constants/path";
+import { handleAddCart } from "@/store/reducers/cartReducer";
 import { formatCurrency } from "@/utils/format";
 import { Empty } from "antd";
 import React from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
@@ -15,12 +17,24 @@ const ImageWrapper = styled.div`
 `;
 
 const ProductCard = ({ product }) => {
-  const { id, images, slug, title, price, rating, discount } = product || {};
+  const dispatch = useDispatch();
+  const { id, images, slug, title, price, rating, discount, color } =
+    product || {};
   const productPath = PATHS.PRODUCT.INDEX + `/${slug}`;
 
   // Handle Add to cart
   const _onAddToCart = (e) => {
     e?.preventDefault();
+
+    // ADD CART
+    const addPayload = {
+      addedId: id,
+      addedColor: color?.[0],
+      addedQuantity: 1,
+      addedPrice: price - discount,
+    };
+
+    dispatch(handleAddCart(addPayload));
   };
   return (
     <div className="product product-2">
