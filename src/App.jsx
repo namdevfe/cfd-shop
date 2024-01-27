@@ -90,9 +90,9 @@ function App() {
           <Route element={<PrivateRoute redirectPath={PATHS.HOME} />}>
             {/* Cart - Checkout - Checkout Success */}
             <Route path={PATHS.SHOPPING_CART} element={<Cart />} />
-            <Route path={PATHS.CHECKOUT.INDEX} element={<Checkout />} />
+            <Route path={PATHS.CHECKOUT} element={<Checkout />} />
             <Route
-              path={PATHS.CHECKOUT.SUCCESS}
+              path={PATHS.CHECKOUT_SUCCESS}
               element={<CheckoutSuccess />}
             />
 

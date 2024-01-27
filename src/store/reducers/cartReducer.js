@@ -16,6 +16,9 @@ const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
+    handleUpdateCacheCart: (state, action) => {
+      state.cartInfo = action.payload || state.cartInfo;
+    },
     clearCart: (state) => {
       state.cartInfo = {};
     },
@@ -70,7 +73,7 @@ const cartSlice = createSlice({
 });
 
 const { reducer: cartReducer, actions } = cartSlice;
-export const { clearCart } = actions;
+export const { clearCart, handleUpdateCacheCart } = actions;
 export default cartReducer;
 
 // Async Actions

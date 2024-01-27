@@ -4,6 +4,7 @@ import {
   handleLogout,
   handleShowAuthModal,
 } from "@/store/reducers/authReducer";
+import { clearCart } from "@/store/reducers/cartReducer";
 import tokenMethod from "@/utils/token";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -24,6 +25,7 @@ const HeaderTop = () => {
     e?.preventDefault();
     e?.stopPropagation();
     dispatch(handleLogout());
+    dispatch(clearCart());
     navigate(PATHS.HOME);
   };
 
