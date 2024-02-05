@@ -20,11 +20,11 @@ const Home = () => {
     getDealProps,
     apiLoading,
   } = useHomePage();
-  const loading = useDebounce(apiLoading, 300);
+  // const loading = useDebounce(apiLoading, 300);
 
-  if (loading) {
-    return <PageLoading />;
-  }
+  // if (loading) {
+  //   return <PageLoading />;
+  // }
 
   return (
     <main className="main">
