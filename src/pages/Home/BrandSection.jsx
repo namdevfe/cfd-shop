@@ -8,10 +8,11 @@ const BrandSection = ({ brands }) => {
 
   return (
     <div className="container">
-      <div
-        className="owl-carousel mt-5 mb-5 owl-simple"
-        data-toggle="owl"
-        data-owl-options='{
+      {brands?.length > 0 && (
+        <div
+          className="owl-carousel mt-5 mb-5 owl-simple"
+          data-toggle="owl"
+          data-owl-options='{
                                                   "nav": false, 
                                                   "dots": false,
                                                   "margin": 30,
@@ -34,15 +35,16 @@ const BrandSection = ({ brands }) => {
                                                       }
                                                   }
                                               }'
-      >
-        {brands?.map((brand, index) => {
-          return (
-            <div key={new Date().getTime() + index} className="brand">
-              <img src={brand} alt="Brand Name" />
-            </div>
-          );
-        })}
-      </div>
+        >
+          {brands?.map((brand, index) => {
+            return (
+              <div key={new Date().getTime() + index} className="brand">
+                <img src={brand} alt="Brand Name" />
+              </div>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 };
