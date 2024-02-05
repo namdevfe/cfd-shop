@@ -17,3 +17,8 @@ export const CHECKOUT_MESSAGE = {
   checkoutSuccess: "Checkout is sucessfully",
   checkoutFailed: "Checkout is failed",
 };
+
+export const UPDATE_PROFILE_MESSAGE = {
+  success: "Update profile successfully",
+  failed: "Update profile failed",
+};

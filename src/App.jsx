@@ -25,10 +25,14 @@ import MyAddress from "./pages/Dashboard/MyAddress";
 import MyOrders from "./pages/Dashboard/MyOrders";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { handleGetProfile } from "./store/reducers/authReducer";
+import {
+  handleAddWishList,
+  handleGetProfile,
+} from "./store/reducers/authReducer";
 import { message } from "antd";
 import tokenMethod from "./utils/token";
 import { handleGetCart } from "./store/reducers/cartReducer";
+import ChangePassword from "./pages/Dashboard/ChangePassword";
 
 function App() {
   const dispatch = useDispatch();
@@ -96,21 +100,27 @@ function App() {
               element={<CheckoutSuccess />}
             />
 
-            {/* Profile */}
+            {/* Dashboard */}
             <Route path={PATHS.DASHBOARD.MY_ACCOUNT} element={<Dashboard />}>
-              {/* MyAccount */}
+              {/* My Account */}
               <Route index element={<MyAccount />} />
 
-              {/* MyAddress */}
+              {/* Change password */}
+              <Route
+                path={PATHS.DASHBOARD.CHANGE_PASSWORD}
+                element={<ChangePassword />}
+              />
+
+              {/* My Address */}
               <Route
                 path={PATHS.DASHBOARD.MY_ADDRESS}
                 element={<MyAddress />}
               />
 
-              {/* MyOrders */}
+              {/* My Orders */}
               <Route path={PATHS.DASHBOARD.MY_ORDERS} element={<MyOrders />} />
 
-              {/* MyWishlist */}
+              {/* My Wishlist */}
               <Route
                 path={PATHS.DASHBOARD.MY_WISHLIST}
                 element={<MyWishlist />}

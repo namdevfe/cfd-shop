@@ -16,6 +16,9 @@ const Button = ({
     case "outline":
       variantClass = "btn btn-outline-primary-2";
       break;
+    case "outline-white":
+      variantClass = "btn btn-outline-white";
+      break;
     case "outline-dark":
       variantClass = "btn btn-outline-dark-2";
       break;

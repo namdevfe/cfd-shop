@@ -8,7 +8,11 @@ export const customerService = {
     return axiosInstance.post("/customer/register", payload);
   },
   updateProfile(payload = {}) {
-    return axiosInstance.put("/customer/profiles", payload);
+    return axiosInstance.put("/customer/profiles", payload, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
   },
   getProfile() {
     return axiosInstance.get("/customer/profiles");
@@ -16,11 +20,11 @@ export const customerService = {
   refreshToken(payload = {}) {
     return axiosInstance.put("/customer/refresh", payload);
   },
-  addProductToWhiteList(payload = {}) {
+  addProductToWishList(payload = {}) {
     return axiosInstance.post("/customer/white-list", payload);
   },
-  deleteProductInWhiteList(idProduct = "") {
-    return axiosInstance.delete("/customer/white-list", idProduct);
+  deleteProductInWishList(payload = {}) {
+    return axiosInstance.delete("/customer/white-list", { data: payload });
   },
   getDataProvince() {
     return axiosInstance.get("/provinces");

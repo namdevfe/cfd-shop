@@ -1,4 +1,5 @@
 import { PATHS } from "@/constants/path";
+import { handleAddWishList } from "@/store/reducers/authReducer";
 import { handleAddCart } from "@/store/reducers/cartReducer";
 import { formatCurrency } from "@/utils/format";
 import { Empty } from "antd";
@@ -36,6 +37,13 @@ const ProductCard = ({ product }) => {
 
     dispatch(handleAddCart(addPayload));
   };
+
+  // Handle Add To Wishlist
+  const _onAddToWishList = (e) => {
+    e?.preventDefault();
+    dispatch(handleAddWishList(id));
+  };
+
   return (
     <div className="product product-2">
       <figure className="product-media" style={{ height: 275 }}>
@@ -61,7 +69,11 @@ const ProductCard = ({ product }) => {
           )}
         </Link>
         <div className="product-action-vertical">
-          <a href="#" className="btn-product-icon btn-wishlist btn-expandable">
+          <a
+            href="#"
+            className="btn-product-icon btn-wishlist btn-expandable"
+            onClick={_onAddToWishList}
+          >
             <span>add to wishlist</span>
           </a>
         </div>

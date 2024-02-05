@@ -1,0 +1,11 @@
+.customSelect {
+  position: relative;
+  height: 40px;
+  width: 100%;
+  margin-bottom: 1.3rem;
+}
+
+.customSelect .ant-select-selector {
+  background-color: #f9f9f9 !important;
+  color: #777 !important;
+}

@@ -1,3 +1,5 @@
+import Button from "@/components/Button";
+import { PATHS } from "@/constants/path";
 import React from "react";
 
 const Page404 = () => {
@@ -12,13 +14,14 @@ const Page404 = () => {
         <div className="container">
           <h1 className="error-title">Error 404</h1>
           <p>We are sorry, the page you've requested is not available.</p>
-          <a
-            href="index.html"
-            className="btn btn-outline-primary-2 btn-minwidth-lg"
+          <Button
+            link={PATHS.HOME}
+            variant="outline"
+            className="btn-minwidth-lg"
           >
             <span>BACK TO HOMEPAGE</span>
             <i className="icon-long-arrow-right" />
-          </a>
+          </Button>
         </div>
       </div>
     </main>

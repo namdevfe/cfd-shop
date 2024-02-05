@@ -5,7 +5,7 @@ export const orderService = {
     return axiosInstance.get(`/orders/voucher/${code}`);
   },
   getOrders(query = "") {
-    return axiosInstance.get(`/orders/${query}/me`);
+    return axiosInstance.get(`/orders/me${query}`);
   },
   getOrderById(id = "") {
     return axiosInstance.get(`/order/${id}/me`);

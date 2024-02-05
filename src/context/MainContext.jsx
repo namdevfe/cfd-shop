@@ -1,5 +1,5 @@
 import scrollTop from "@/utils/scrollTop";
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
 export const MainContext = createContext({});
@@ -11,7 +11,7 @@ const MainContextProvider = ({ children }) => {
   useEffect(() => {
     handleCloseMenuMobile();
 
-    // Hadle event scroll to top
+    // Handle event scroll to top
     scrollTop();
   }, [pathname]);
 

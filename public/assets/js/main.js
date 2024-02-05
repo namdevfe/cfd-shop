@@ -468,15 +468,15 @@ $(document).ready(function () {
   //   });
 
   // Dashboard Page Tab Trigger
-  $(".tab-trigger-link").on("click", function (e) {
-    var targetHref = $(this).attr("href");
+  // $(".tab-trigger-link").on("click", function (e) {
+  //   var targetHref = $(this).attr("href");
 
-    $(".nav-dashboard")
-      .find('a[href="' + targetHref + '"]')
-      .trigger("click");
+  //   $(".nav-dashboard")
+  //     .find('a[href="' + targetHref + '"]')
+  //     .trigger("click");
 
-    e.preventDefault();
-  });
+  //   e.preventDefault();
+  // });
 
   // Masonry / Grid layout fnction
   function layoutInit(container, selector) {

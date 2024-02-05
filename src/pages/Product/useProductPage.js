@@ -1,4 +1,5 @@
 import { SORT_OPTIONS } from "@/constants/general";
+import { useMainContext } from "@/context/MainContext";
 import useDebounce from "@/hooks/useDebounce";
 import useMutation from "@/hooks/useMutation";
 import useQuery from "@/hooks/useQuery";
@@ -11,6 +12,7 @@ import { useLocation, useSearchParams } from "react-router-dom";
 const PRODUCT_LIMITS = 9;
 
 const useProductPage = () => {
+  const { handleCloseMenuMobile } = useMainContext();
   // Get queryString from url
   const { search } = useLocation();
 
@@ -57,6 +59,7 @@ const useProductPage = () => {
   useEffect(() => {
     fetchProducts(search);
     scrollTop();
+    handleCloseMenuMobile?.();
   }, [search]);
 
   const productListLoading = useDebounce(productsLoading, 2000);

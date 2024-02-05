@@ -7,7 +7,7 @@ import {
 import { clearCart } from "@/store/reducers/cartReducer";
 import tokenMethod from "@/utils/token";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const HeaderTop = () => {
   const navigate = useNavigate();
@@ -43,21 +43,23 @@ const HeaderTop = () => {
               <li>
                 <a href="#" className="top-link-menu">
                   <i className="icon-user" />
-                  {firstName || email || "Default"}
+                  {firstName || email || "Guest"}
                 </a>
                 <ul>
                   <li>
                     <ul>
                       <li>
-                        <a href="dashboard.html">Account Details</a>
+                        <Link to={PATHS.DASHBOARD.MY_ACCOUNT}>
+                          Account Details
+                        </Link>
                       </li>
                       <li>
-                        <a href="dashboard.html">Your Orders</a>
+                        <Link to={PATHS.DASHBOARD.MY_ORDERS}>Your Orders</Link>
                       </li>
                       <li>
-                        <a href="dashboard.html">
-                          Wishlist <span>(3)</span>
-                        </a>
+                        <Link to={PATHS.DASHBOARD.MY_WISHLIST}>
+                          Wishlist <span>({profile?.whiteList?.length})</span>
+                        </Link>
                       </li>
                       <li>
                         <a href="#" onClick={_onLogout}>

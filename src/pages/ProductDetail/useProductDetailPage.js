@@ -1,6 +1,7 @@
 import useQuery from "@/hooks/useQuery";
 import { productService } from "@/services/productService";
 import { reviewsService } from "@/services/reviewsService";
+import { handleAddWishList } from "@/store/reducers/authReducer";
 import { handleAddCart } from "@/store/reducers/cartReducer";
 import { message } from "antd";
 import { useRef } from "react";
@@ -63,7 +64,7 @@ const useProductDetailPage = () => {
   };
 
   const handleAddToWishList = () => {
-    console.log("handleAddToWishList");
+    dispatch(handleAddWishList(id));
   };
 
   // Props

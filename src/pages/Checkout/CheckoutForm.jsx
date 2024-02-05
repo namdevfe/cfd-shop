@@ -85,7 +85,7 @@ const CheckoutForm = ({ handleCheckout }) => {
       fullName: firstName,
       phone,
       email,
-      province: "64ac29e1b3f2b21237701c94",
+      province,
       district,
       ward,
       street,
@@ -103,7 +103,7 @@ const CheckoutForm = ({ handleCheckout }) => {
       ward,
       street,
     });
-    handleProvinceChange?.(provinceId);
+    handleProvinceChange?.(province);
     handleDistrictChange?.(district);
     handleWardChange?.(ward);
   }, [profile]);
@@ -210,6 +210,7 @@ const CheckoutForm = ({ handleCheckout }) => {
                 label="Email address"
                 placeholder="Email address"
                 required
+                disabled
                 {...register("email", {
                   required: MESSAGE.required,
                   pattern: {

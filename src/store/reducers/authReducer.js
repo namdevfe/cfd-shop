@@ -11,6 +11,7 @@ const initialState = {
     login: false,
     register: false,
     getProfile: false,
+    wishList: false,
   },
 };
 
@@ -65,6 +66,28 @@ const authSlice = createSlice({
     });
     builder.addCase(handleRegister.rejected, (state) => {
       state.loading.register = false;
+    });
+
+    // Handle Add To Wishlist
+    builder.addCase(handleAddWishList.pending, (state) => {
+      state.loading.wishList = true;
+    });
+    builder.addCase(handleAddWishList.fulfilled, (state) => {
+      state.loading.wishList = false;
+    });
+    builder.addCase(handleAddWishList.rejected, (state) => {
+      state.loading.wishList = false;
+    });
+
+    // Handle Remove In Wishlist
+    builder.addCase(handleRemoveInWishList.pending, (state) => {
+      state.loading.wishList = true;
+    });
+    builder.addCase(handleRemoveInWishList.fulfilled, (state) => {
+      state.loading.wishList = false;
+    });
+    builder.addCase(handleRemoveInWishList.rejected, (state) => {
+      state.loading.wishList = false;
     });
   },
 });
@@ -147,6 +170,66 @@ export const handleRegister = createAsyncThunk(
         message.error("This email has been registered!");
       }
       return thunkAPI.rejectWithValue(errorInfo);
+    }
+  }
+);
+
+// Handle add wishlist
+export const handleAddWishList = createAsyncThunk(
+  "auth/handleAddWishList",
+  async (actionPayload, thunkApi) => {
+    if (tokenMethod.get()) {
+      try {
+        const { profile } = thunkApi.getState()?.auth || {};
+        const { whiteList } = profile || {};
+
+        let payload = {};
+        if (whiteList?.length > 0) {
+          const matchIndex = whiteList?.findIndex(
+            (item) => item?.id === actionPayload
+          );
+          if (matchIndex > -1) {
+            message.error("Product is already in wishlist");
+            return;
+          } else {
+            payload = { product: actionPayload };
+          }
+        } else {
+          payload = { product: actionPayload };
+        }
+        const res = await customerService.addProductToWishList(payload);
+        if (res?.data?.data) {
+          message.success("Add to wishlist successfully");
+          thunkApi.dispatch(handleGetProfile());
+        }
+        return res?.data?.data;
+      } catch (error) {
+        message.error(error?.response?.data);
+        return thunkApi.rejectWithValue(error?.response?.data);
+      }
+    }
+  }
+);
+
+// Handle remove wishlist
+export const handleRemoveInWishList = createAsyncThunk(
+  "auth/handleRemoveInWishList",
+  async (actionPayload, thunkApi) => {
+    if (tokenMethod.get()) {
+      try {
+        const payload = {
+          product: actionPayload,
+        };
+        const res = await customerService.deleteProductInWishList(payload);
+        if (res?.data?.data) {
+          message.success("Remove product in wishlist successfully");
+          thunkApi.dispatch(handleGetProfile());
+          return res?.data?.data;
+        }
+      } catch (error) {
+        message.error("Remove product in wishlist failed");
+        return thunkApi.rejectWithValue(error?.response?.data);
+      }
     }
   }
 );

@@ -38,6 +38,7 @@ export const PATHS = {
     MY_ORDERS: DASHBOARD_PATH + "/my-orders",
     MY_WISHLIST: DASHBOARD_PATH + "/my-wishlist",
     MY_ADDRESS: DASHBOARD_PATH + "/my-address",
+    CHANGE_PASSWORD: DASHBOARD_PATH + "/change-password",
   },
 
   NOT_FOUND: "*",

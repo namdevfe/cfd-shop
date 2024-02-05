@@ -1,28 +1,26 @@
+import Breadcrumb from "@/components/Breadcrumb";
+import Button from "@/components/Button";
+import { PATHS } from "@/constants/path";
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Privacy = () => {
   return (
     <main className="main">
       <div
         className="page-header text-center"
-        style={{ backgroundImage: 'url("assets/images/page-header-bg.jpg")' }}
+        style={{ backgroundImage: 'url("/assets/images/page-header-bg.jpg")' }}
       >
         <div className="container">
           <h1 className="page-title">Privacy Policy</h1>
         </div>
       </div>
-      <nav aria-label="breadcrumb" className="breadcrumb-nav">
-        <div className="container">
-          <ol className="breadcrumb">
-            <li className="breadcrumb-item">
-              <a href="index.html">Home</a>
-            </li>
-            <li className="breadcrumb-item active" aria-current="page">
-              Privacy Policy
-            </li>
-          </ol>
-        </div>
-      </nav>
+      <Breadcrumb>
+        <Breadcrumb.Item>
+          <Link to={PATHS.HOME}>Home</Link>
+        </Breadcrumb.Item>
+        <Breadcrumb.Item isActive>Privacy Policy</Breadcrumb.Item>
+      </Breadcrumb>
       <div className="page-content">
         <div className="container">
           <div className="entry-body">
@@ -61,7 +59,7 @@ const Privacy = () => {
                 justo. Suspendisse potenti. Sed egestas, ante et vulputate
                 volutpat, eros pede semper est, vitae luctus metus libero eu
                 augue. Morbi purus libero, faucibus adipiscing, commodo quis,
-                gravida id, est. Sed lectus. Praesent{"{"}" "{"}"}
+                gravida id, est. Sed lectus. Praesent {""}
                 <a href="#">elementum hendrerit</a> tortor. Sed semper lorem at
                 felis. Vestibulum volutpat, lacus a ultrices sagittis, mi neque
                 euismod dui, eu pulvinar nunc sapien ornare nisl. Phasellus pede
@@ -76,8 +74,7 @@ const Privacy = () => {
                 nisl. Phasellus pede arcu, dapibus eu, fermentum et, dapibus
                 sed, urna. Morbi interdum mollis sapien. Sed ac risus. Phasellus
                 lacinia, magna a ullamcorper laoreet, lectus arcu pulvinar
-                risus, vitae facilisis libero dolor a purus. Sed vel lacus.{"{"}
-                " "{"}"}
+                risus, vitae facilisis libero dolor a purus. Sed vel lacus.{" "}
               </p>
               <p>
                 Mauris nibh felis, adipiscing varius, adipiscing in, lacinia
@@ -106,7 +103,7 @@ const Privacy = () => {
       <div
         className="cta cta-display bg-image pt-4 pb-4"
         style={{
-          backgroundImage: "url(assets/images/backgrounds/cta/bg-7.jpg)",
+          backgroundImage: "url(/assets/images/backgrounds/cta/bg-7.jpg)",
         }}
       >
         <div className="container">
@@ -122,10 +119,10 @@ const Privacy = () => {
                   </p>
                 </div>
                 <div className="col-auto">
-                  <a href="contact.html" className="btn btn-outline-white">
+                  <Button link={PATHS.CONTACT} variant="outline-white">
                     <span>CONTACT US</span>
                     <i className="icon-long-arrow-right" />
-                  </a>
+                  </Button>
                 </div>
               </div>
             </div>

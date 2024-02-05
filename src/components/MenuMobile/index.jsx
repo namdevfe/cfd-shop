@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import { MenuStyle } from "../StyledComponents";
 import { NavLink } from "react-router-dom";
 import { PATHS } from "@/constants/path";
+import useQuery from "@/hooks/useQuery";
+import { productService } from "@/services/productService";
 
 const MENUS = {
   MENU: "menu",
@@ -11,12 +13,15 @@ const MENUS = {
 };
 
 const MenuMobile = () => {
+  const { data: categoriesData } = useQuery(productService.getCategories);
   const { handleCloseMenuMobile } = useMainContext();
   const [selectedTab, setSelectedTab] = useState(MENUS.MENU);
   const _onTabChange = (e, selectedTab) => {
     e.preventDefault();
     setSelectedTab(selectedTab);
   };
+
+  const categories = categoriesData?.products || [];
 
   return (
     <>
@@ -115,12 +120,21 @@ const MenuMobile = () => {
             >
               <nav className="mobile-cats-nav">
                 <ul className="mobile-cats-menu">
-                  <li>
-                    <a className="mobile-cats-lead" href="#">
-                      TV
-                    </a>
-                  </li>
-                  <li>
+                  {categories?.length > 0 &&
+                    categories.map((category, index) => {
+                      const categoryPath =
+                        category?.id &&
+                        PATHS.PRODUCT.INDEX + `?category=${category?.id}`;
+                      return (
+                        <li key={category?.id || index}>
+                          <NavLink to={categoryPath}>
+                            {category?.name || ""}
+                          </NavLink>
+                        </li>
+                      );
+                    })}
+
+                  {/* <li>
                     <a href="#">Computers</a>
                   </li>
                   <li>
@@ -131,7 +145,7 @@ const MenuMobile = () => {
                   </li>
                   <li>
                     <a href="#">Accessories</a>
-                  </li>
+                  </li> */}
                 </ul>
                 {/* End .mobile-cats-menu */}
               </nav>
