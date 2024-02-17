@@ -12,6 +12,7 @@ import { Controller, useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import "@/assets/style.css";
 
 const FormContainer = styled.form`
   .form-group {
@@ -22,7 +23,7 @@ const FormContainer = styled.form`
     }
   }
 
-  .customSelect {
+  /* .customSelect {
     padding: 0;
     border-radius: 6px;
     &:hover,
@@ -33,7 +34,7 @@ const FormContainer = styled.form`
         outline: unset !important;
       }
     }
-  }
+  } */
 `;
 
 const CheckoutForm = ({ handleCheckout }) => {
@@ -236,7 +237,7 @@ const CheckoutForm = ({ handleCheckout }) => {
                   return (
                     <>
                       <Select
-                        className="form-control customSelect"
+                        className="customSelect select-custom"
                         showSearch
                         suffixIcon={<></>}
                         optionFilterProp="children"
@@ -270,7 +271,7 @@ const CheckoutForm = ({ handleCheckout }) => {
                   return (
                     <>
                       <Select
-                        className="form-control customSelect"
+                        className="customSelect select-custom"
                         disabled={!!!provinceId}
                         suffixIcon={<></>}
                         showSearch
@@ -305,7 +306,7 @@ const CheckoutForm = ({ handleCheckout }) => {
                   return (
                     <>
                       <Select
-                        className="form-control customSelect"
+                        className="customSelect select-custom"
                         disabled={!!!districtId}
                         suffixIcon={<></>}
                         showSearch

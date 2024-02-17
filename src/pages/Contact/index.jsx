@@ -7,31 +7,40 @@ import ContactInfo from "./ContactInfo";
 import useContactPage from "./useContactPage";
 
 const Contact = () => {
-  const { contactFormProps } = useContactPage();
+  const { contactFormProps, contentContactProps } = useContactPage();
+  const { bannerInfo, contactInfo } = contentContactProps || {};
+  console.log("🚀contactInfo---->", contactInfo);
   return (
     <main className="main">
       <Breadcrumb>
         <Breadcrumb.Item>
           <Link to={PATHS.HOME}>Home</Link>
         </Breadcrumb.Item>
-        <Breadcrumb.Item isActive>Contact us</Breadcrumb.Item>
+        <Breadcrumb.Item isActive>
+          {bannerInfo?.title || "Contact Us"}
+        </Breadcrumb.Item>
       </Breadcrumb>
       <div className="container">
         <div
           className="page-header page-header-big text-center"
           style={{
-            backgroundImage: 'url("/assets/images/contact-header-bg.jpg")',
+            backgroundImage: `url(${
+              bannerInfo.bannerImage || "/assets/images/contact-header-bg.jpg"
+            })`,
           }}
         >
           <h1 className="page-title text-white">
-            Contact us <span className="text-white">keep in touch with us</span>
+            {bannerInfo.title || "Contact Us"}{" "}
+            <span className="text-white">
+              {bannerInfo.subTitle || "keep in touch with us"}
+            </span>
           </h1>
         </div>
       </div>
       <div className="page-content pb-0">
         <div className="container">
           <div className="row">
-            <ContactInfo />
+            <ContactInfo {...contactInfo} />
             <ContactForm {...contactFormProps} />
           </div>
           <hr className="mt-4 mb-5" />

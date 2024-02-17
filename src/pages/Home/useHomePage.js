@@ -32,7 +32,7 @@ const useHomePage = () => {
   const featuredProducts = products?.filter((product) => product.featured);
 
   // Handle Intro Section
-  const introProducts = featuredProducts.slice(0, 3);
+  const introProducts = homeData?.data?.category || [];
   const introProps = {
     introProducts,
   };

@@ -50,7 +50,6 @@ const HeaderMiddle = () => {
           </MenuStyle>
         </nav>
         <div className="header-right">
-          <Search />
           <CartDropdown {...cartDropdownProps} />
         </div>
       </div>

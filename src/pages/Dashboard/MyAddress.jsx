@@ -21,7 +21,9 @@ const MyAddress = () => {
     [profile?.ward]
   );
 
-  const address = `${profile?.street}, ${wardData?.name}, ${districtData?.name}, ${provinceData?.name}`;
+  const address =
+    `${profile?.street}, ${wardData?.name}, ${districtData?.name}, ${provinceData?.name}` ||
+    "No address";
 
   return (
     <div className="tab-pane fade active show">
@@ -50,7 +52,7 @@ const MyAddress = () => {
             <div className="card-body">
               <h3 className="card-title">Shipping Address</h3>
               <p>
-                {address || ""} <br />
+                {!!!address ? "No address" : address} <br />
                 <br />
                 <Link to={PATHS.DASHBOARD.MY_ACCOUNT}>
                   Edit <i className="icon-edit" />

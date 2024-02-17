@@ -8,4 +8,10 @@
 .customSelect .ant-select-selector {
   background-color: #f9f9f9 !important;
   color: #777 !important;
+  border-radius: 0 !important;
+}
+
+.customSelect:hover .ant-select-selector,
+.customSelect:focus .ant-select-selector {
+  border-color: #fcb941 !important;
 }

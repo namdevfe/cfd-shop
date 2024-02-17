@@ -43,3 +43,23 @@ export const PATHS = {
 
   NOT_FOUND: "*",
 };
+
+export const FOOTER_PATHS = [
+  {
+    title: "Useful Links",
+    path: [PATHS.ABOUT, PATHS.PRODUCT.INDEX, PATHS.FAQ, PATHS.CONTACT],
+  },
+  {
+    title: "Customer Service",
+    path: [PATHS.PAYMENT_METHOD, PATHS.RETURNS, PATHS.SHIPPING, PATHS.PRIVACY],
+  },
+  {
+    title: "My Account",
+    path: [
+      PATHS.DASHBOARD.MY_ACCOUNT,
+      PATHS.SHOPPING_CART,
+      PATHS.DASHBOARD.MY_WISHLIST,
+      PATHS.DASHBOARD.MY_ORDERS,
+    ],
+  },
+];

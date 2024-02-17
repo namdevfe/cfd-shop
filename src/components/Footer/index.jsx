@@ -1,8 +1,21 @@
 import { PATHS } from "@/constants/path";
 import React from "react";
 import { Link } from "react-router-dom";
+import useFooter from "./useFooter";
 
 const Footer = () => {
+  const { footerProps } = useFooter();
+  const {
+    info,
+    hotline,
+    customerServiceTitle,
+    customerServices,
+    usefulLinks,
+    usefulLinkTitle,
+    myAccountTitle,
+    myAccounts,
+  } = footerProps || {};
+
   return (
     <footer className="footer">
       <div className="footer-middle">
@@ -18,70 +31,46 @@ const Footer = () => {
                     width={120}
                   />
                 </Link>
-                <p>
-                  Praesent dapibus, neque id cursus ucibus, tortor neque egestas
-                  augue, eu vulputate magna eros eu erat.
-                </p>
+                <p>{info || ""}</p>
                 <div className="widget-call">
                   <i className="icon-phone" /> Got Question? Call us 24/7
-                  <a href="tel:#">0377 813 805</a>
+                  <a href="tel:#">{hotline || ""}</a>
                 </div>
               </div>
             </div>
             <div className="col-sm-6 col-lg-2 offset-lg-1">
               <div className="widget">
-                <h4 className="widget-title">Useful Links</h4>
+                <h4 className="widget-title">{usefulLinkTitle || ""}</h4>
                 <ul className="widget-list">
-                  <li>
-                    <Link to={PATHS.ABOUT}>About Us</Link>
-                  </li>
-                  <li>
-                    <Link to={PATHS.PRODUCT.INDEX}>Product</Link>
-                  </li>
-                  <li>
-                    <Link to={PATHS.FAQ}>FAQs</Link>
-                  </li>
-                  <li>
-                    <Link to={PATHS.CONTACT}>Contact us</Link>
-                  </li>
+                  {usefulLinks?.map((item, index) => (
+                    <li key={index}>
+                      <Link to={item.path}>{item.title}</Link>
+                    </li>
+                  ))}
                 </ul>
               </div>
             </div>
             <div className="col-sm-6 col-lg-2">
               <div className="widget">
-                <h4 className="widget-title">Customer Service</h4>
+                <h4 className="widget-title">{customerServiceTitle || ""}</h4>
                 <ul className="widget-list">
-                  <li>
-                    <Link to={PATHS.PAYMENT_METHOD}>Payment Methods</Link>
-                  </li>
-                  <li>
-                    <Link to={PATHS.RETURNS}>Returns</Link>
-                  </li>
-                  <li>
-                    <Link to={PATHS.SHIPPING}>Shipping</Link>
-                  </li>
-                  <li>
-                    <Link to={PATHS.PRIVACY}>Privacy Policy</Link>
-                  </li>
+                  {customerServices?.map((item, index) => (
+                    <li key={index}>
+                      <Link to={item.path}>{item.title}</Link>
+                    </li>
+                  ))}
                 </ul>
               </div>
             </div>
             <div className="col-sm-6 col-lg-2">
               <div className="widget">
-                <h4 className="widget-title">My Account</h4>
+                <h4 className="widget-title">{myAccountTitle || ""}</h4>
                 <ul className="widget-list">
-                  <li>
-                    <Link to={PATHS.DASHBOARD.MY_ACCOUNT}>Account Details</Link>
-                  </li>
-                  <li>
-                    <Link to={PATHS.SHOPPING_CART}>View Cart</Link>
-                  </li>
-                  <li>
-                    <Link to={PATHS.DASHBOARD.MY_WISHLIST}>My Wishlist</Link>
-                  </li>
-                  <li>
-                    <Link to={PATHS.DASHBOARD.MY_ORDERS}>Track My Order</Link>
-                  </li>
+                  {myAccounts?.map((item, index) => (
+                    <li key={index}>
+                      <Link to={item.path}>{item.title}</Link>
+                    </li>
+                  ))}
                 </ul>
               </div>
             </div>

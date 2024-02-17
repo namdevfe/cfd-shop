@@ -48,7 +48,7 @@ const IntroSection = ({ introProducts }) => {
                         $247 <sup>.99</sup>
                       </span>
                     </div>
-                    <Button className="btn-round" link={PATHS.PRODUCT.DETAIL}>
+                    <Button className="btn-round" link={PATHS.PRODUCT.INDEX}>
                       <span>Click Here</span>
                       <i className="icon-long-arrow-right" />
                     </Button>
@@ -75,7 +75,7 @@ const IntroSection = ({ introProducts }) => {
                         $29 <sup>.99</sup>
                       </span>
                     </div>
-                    <Button link={PATHS.PRODUCT.DETAIL} className="btn-round">
+                    <Button link={PATHS.PRODUCT.INDEX} className="btn-round">
                       <span>Click Here</span>
                       <i className="icon-long-arrow-right" />
                     </Button>
@@ -88,11 +88,9 @@ const IntroSection = ({ introProducts }) => {
           <div className="col-lg-4">
             <div className="intro-banners">
               {introProducts?.map((products, index) => {
-                const { id, images, title, slug } = products || {};
-                const productPath = PATHS.PRODUCT.INDEX + `/${slug}`;
                 return (
                   <div
-                    key={id || index}
+                    key={index}
                     className="banner mb-lg-1 mb-xl-2"
                     style={{
                       display: "flex",
@@ -100,23 +98,24 @@ const IntroSection = ({ introProducts }) => {
                       alignItems: "center",
                     }}
                   >
-                    <Link to={productPath}>
+                    <Link to={PATHS.PRODUCT.INDEX}>
                       <img
                         style={{
                           height: 119,
                           objectFit: "contain",
                           objectPosition: "center right",
-                          opacity: 0.5,
                         }}
-                        src={images?.[0] || ""}
-                        alt={title || ""}
+                        src={products.image || ""}
+                        alt={products.name || ""}
                       />
                     </Link>
                     <div className="banner-content">
                       <h3 className="banner-title">
-                        <Link to={productPath}>{title || ""}</Link>
+                        <Link to={PATHS.PRODUCT.INDEX}>
+                          {products.name || ""}
+                        </Link>
                       </h3>
-                      <Link to={productPath} className="banner-link">
+                      <Link to={PATHS.PRODUCT.INDEX} className="banner-link">
                         Shop Now <i className="icon-long-arrow-right" />
                       </Link>
                     </div>
