@@ -1,5 +1,5 @@
 import Button from "@/components/Button";
-import { MESSAGE, REGEX } from "@/constants/validate";
+import { MESSAGE, REGEX, REQUIRED_MESSAGE } from "@/constants/validate";
 import { useForm } from "react-hook-form";
 
 const GetDealSection = ({ handleSubscribeDeal }) => {
@@ -96,7 +96,7 @@ const GetDealSection = ({ handleSubscribeDeal }) => {
                       className="form-control"
                       placeholder="Enter your Email Address"
                       {...register("email", {
-                        required: MESSAGE.required,
+                        required: REQUIRED_MESSAGE.email,
                         pattern: {
                           value: REGEX.email,
                           message: MESSAGE.email,

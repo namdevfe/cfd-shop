@@ -3,20 +3,35 @@ import RadioGroup from "@/components/RadioGroup";
 import { SHIPPING_OPTIONS } from "@/constants/general";
 import { PATHS } from "@/constants/path";
 import { formatCurrency } from "@/utils/format";
-import { message } from "antd";
+import { message, Modal } from "antd";
+import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const CartSummary = ({ subTotal, total, typeShip, handleUpdateShipping }) => {
   const navigate = useNavigate();
-  // Event handler
+  const { confirm } = Modal;
+
+  // Handle proceed checkout
   const _onProceedToCheckout = (e) => {
     e?.preventDefault();
     if (!typeShip) {
       message.error("Please select shipping type");
     } else {
-      navigate(PATHS.CHECKOUT);
+      confirm({
+        title: "Do you want checkout?",
+        onOk() {
+          navigate(PATHS.CHECKOUT);
+        },
+        onCancel() {
+          console.log("🚀cancel---->");
+        },
+      });
     }
   };
+
+  useEffect(() => {
+    handleUpdateShipping?.(SHIPPING_OPTIONS[0].value);
+  }, [typeShip]);
 
   return (
     <aside className="col-lg-3">

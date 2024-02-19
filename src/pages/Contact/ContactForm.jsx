@@ -1,8 +1,20 @@
 import Button from "@/components/Button";
 import { Input } from "@/components/Input";
-import { MESSAGE, REGEX } from "@/constants/validate";
+import { MESSAGE, REGEX, REQUIRED_MESSAGE } from "@/constants/validate";
+import cn from "@/utils/cn";
 import React from "react";
 import { useForm } from "react-hook-form";
+import styled from "styled-components";
+
+const FormContainer = styled.form`
+  .form-error {
+    line-height: initial;
+  }
+
+  .form-group {
+    margin-bottom: initial;
+  }
+`;
 
 const ContactForm = ({ handleSubmitContactForm }) => {
   const {
@@ -21,13 +33,16 @@ const ContactForm = ({ handleSubmitContactForm }) => {
       <p className="mb-2">
         Use the form below to get in touch with the sales team
       </p>
-      <form className="contact-form mb-3" onSubmit={handleSubmit(onSubmit)}>
+      <FormContainer
+        className="contact-form mb-3"
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <div className="row">
           <div className="col-sm-6">
             <Input
               placeholder="Name *"
               {...register("name", {
-                required: MESSAGE.required,
+                required: REQUIRED_MESSAGE.name,
               })}
               error={errors?.name?.message || ""}
             />
@@ -36,7 +51,7 @@ const ContactForm = ({ handleSubmitContactForm }) => {
             <Input
               placeholder="Email *"
               {...register("email", {
-                required: MESSAGE.required,
+                required: REQUIRED_MESSAGE.email,
                 pattern: {
                   value: REGEX.email,
                   message: MESSAGE.email,
@@ -51,7 +66,7 @@ const ContactForm = ({ handleSubmitContactForm }) => {
             <Input
               placeholder="Phone *"
               {...register("phone", {
-                required: MESSAGE.required,
+                required: REQUIRED_MESSAGE.phone,
                 pattern: {
                   value: REGEX.phone,
                   message: MESSAGE.phone,
@@ -64,7 +79,7 @@ const ContactForm = ({ handleSubmitContactForm }) => {
             <Input
               placeholder="Title *"
               {...register("title", {
-                required: MESSAGE.required,
+                required: REQUIRED_MESSAGE.title,
               })}
               error={errors?.title?.message || ""}
             />
@@ -74,13 +89,15 @@ const ContactForm = ({ handleSubmitContactForm }) => {
           renderInput={({ inputProps }) => {
             return (
               <textarea
-                className="form-control"
+                className={cn("form-control", {
+                  "input-error": !!errors?.description?.message,
+                })}
                 placeholder="Description *"
                 row={4}
                 col={30}
                 {...inputProps}
                 {...register("description", {
-                  required: MESSAGE.required,
+                  required: REQUIRED_MESSAGE.description,
                 })}
                 style={{ resize: "none" }}
               />
@@ -93,7 +110,7 @@ const ContactForm = ({ handleSubmitContactForm }) => {
           <span>SUBMIT</span>
           <i className="icon-long-arrow-right" />
         </Button>
-      </form>
+      </FormContainer>
     </div>
   );
 };

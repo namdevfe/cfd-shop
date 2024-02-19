@@ -6,7 +6,7 @@ import { MESSAGE, REGEX } from "@/constants/validate";
 import useAddress from "@/hooks/useAddress";
 import cn from "@/utils/cn";
 import { formatCurrency, removeAccents } from "@/utils/format";
-import { Select, message } from "antd";
+import { Modal, Select, message } from "antd";
 import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
@@ -22,24 +22,18 @@ const FormContainer = styled.form`
       line-height: normal;
     }
   }
-
-  /* .customSelect {
-    padding: 0;
-    border-radius: 6px;
-    &:hover,
-    &:focus {
-      .ant-select-selector {
-        border-color: #fcb941 !important;
-        box-shadow: unset !important;
-        outline: unset !important;
-      }
-    }
-  } */
 `;
 
 const CheckoutForm = ({ handleCheckout }) => {
   const { profile } = useSelector((state) => state.auth);
   const { cartInfo } = useSelector((state) => state.cart);
+
+  const [currentPayment, setCurrentPayment] = useState(PAYMENT_METHOD.card);
+  const isCash = PAYMENT_METHOD.cash === currentPayment;
+  const isCard = PAYMENT_METHOD.card === currentPayment;
+
+  const { confirm } = Modal;
+
   const {
     product,
     totalProduct,
@@ -109,10 +103,6 @@ const CheckoutForm = ({ handleCheckout }) => {
     handleWardChange?.(ward);
   }, [profile]);
 
-  const [currentPayment, setCurrentPayment] = useState();
-  const isCash = PAYMENT_METHOD.cash === currentPayment;
-  const isCard = PAYMENT_METHOD.card === currentPayment;
-
   // Events handler
   const _onSubmit = (data) => {
     if (!shipping?.typeShip) {
@@ -125,17 +115,29 @@ const CheckoutForm = ({ handleCheckout }) => {
       return;
     }
 
-    const formInfo = {
-      ...data,
-      province: provinces?.find((province) => province.value === provinceId),
-      district: districts?.find((district) => district.value === districtId),
-      ward: wards?.find((ward) => ward.value === wardId),
-      paymentMethod: currentPayment,
-    };
+    confirm({
+      title: "Do you want proceed to checkout?",
+      onOk() {
+        const formInfo = {
+          ...data,
+          province: provinces?.find(
+            (province) => province.value === provinceId
+          ),
+          district: districts?.find(
+            (district) => district.value === districtId
+          ),
+          ward: wards?.find((ward) => ward.value === wardId),
+          paymentMethod: currentPayment,
+        };
 
-    handleCheckout?.({
-      formInfo,
-      cartInfo,
+        handleCheckout?.({
+          formInfo,
+          cartInfo,
+        });
+      },
+      onCancel() {
+        console.log("🚀cancel---->");
+      },
     });
   };
 
@@ -494,6 +496,7 @@ const CheckoutForm = ({ handleCheckout }) => {
               type="submit"
               className="btn-order btn-block"
               variant="outline"
+              onClick={_onSubmit}
             >
               <span className="btn-text">Place Order</span>
               <span className="btn-hover-text">Proceed to Checkout</span>

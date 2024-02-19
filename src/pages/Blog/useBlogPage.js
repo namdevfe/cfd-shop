@@ -31,17 +31,6 @@ const useBlogPage = () => {
   const categories = categoriesData?.blogs || [];
   const tags = tagsData?.blogs || [];
 
-  useEffect(() => {
-    fetchBlogs(search);
-    scrollTop();
-  }, [search]);
-
-  useEffect(() => {
-    if (typeof searchValueDebounced === "string") {
-      onSearchChange?.(searchValueDebounced);
-    }
-  }, [searchValueDebounced]);
-
   // Blog List
   const blogs = blogsData?.blogs || [];
   const blogsPopular = blogs.filter((blog) => blog.isPopular === true);
@@ -49,7 +38,7 @@ const useBlogPage = () => {
   // Blog Pagination
   const blogPagi = blogsData?.pagination || {};
 
-  const apiLoading = useDebounce(blogsLoading, 2000);
+  const apiLoading = useDebounce(blogsLoading, 500);
 
   // General Functions
   const updateQueryString = (queryObject) => {
@@ -116,6 +105,17 @@ const useBlogPage = () => {
     onSearchChange,
     searchValueDebounced,
   };
+
+  useEffect(() => {
+    fetchBlogs(search);
+    scrollTop();
+  }, [search]);
+
+  useEffect(() => {
+    if (typeof searchValueDebounced === "string") {
+      onSearchChange?.(searchValueDebounced);
+    }
+  }, [searchValueDebounced]);
 
   return {
     blogListProps,

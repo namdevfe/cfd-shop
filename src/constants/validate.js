@@ -1,8 +1,16 @@
 export const MESSAGE = {
   required: "Please enter your information",
-  email: "Please enter your email with format abc@xyz.com",
+  email: "Email format must be abc@xyz.com",
   password: "Please enter your password of at least 6 characters",
   phone: "Please enter your phone number correct format",
+};
+
+export const REQUIRED_MESSAGE = {
+  email: "Please enter your email",
+  name: "Please enter your name",
+  phone: "Please enter your phone number",
+  title: "Please enter title",
+  description: "Please enter description",
 };
 
 export const REGEX = {

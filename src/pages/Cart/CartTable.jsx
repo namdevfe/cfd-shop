@@ -2,7 +2,7 @@ import ProductColor from "@/components/ProductColor";
 import QuantityInput from "@/components/QuantityInput";
 import { PATHS } from "@/constants/path";
 import { formatCurrency } from "@/utils/format";
-import { Empty, Modal } from "antd";
+import { Modal } from "antd";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 

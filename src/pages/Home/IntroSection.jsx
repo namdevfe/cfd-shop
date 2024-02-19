@@ -104,6 +104,7 @@ const IntroSection = ({ introProducts }) => {
                           height: 119,
                           objectFit: "contain",
                           objectPosition: "center right",
+                          opacity: 0.7,
                         }}
                         src={products.image || ""}
                         alt={products.name || ""}

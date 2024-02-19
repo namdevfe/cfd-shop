@@ -73,7 +73,11 @@ const ProductDetailTop = ({
             ></div>
             <div className="details-filter-row details-row-size">
               <label>Color:</label>
-              <ProductCorlor colors={color} ref={colorRef} />
+              <ProductCorlor
+                defaultColor={color?.[0]}
+                colors={color}
+                ref={colorRef}
+              />
             </div>
           </div>
           <div className="details-filter-row details-row-size">

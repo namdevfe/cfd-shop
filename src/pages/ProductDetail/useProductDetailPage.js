@@ -4,7 +4,7 @@ import { reviewsService } from "@/services/reviewsService";
 import { handleAddWishList } from "@/store/reducers/authReducer";
 import { handleAddCart } from "@/store/reducers/cartReducer";
 import { message } from "antd";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 
@@ -53,7 +53,6 @@ const useProductDetailPage = () => {
     // Call API
     try {
       const res = await dispatch(handleAddCart(addPayload)).unwrap();
-      console.log("res", res);
       if (res) {
         colorReset?.();
         quantityReset?.();

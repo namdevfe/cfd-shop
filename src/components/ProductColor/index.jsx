@@ -1,5 +1,12 @@
-import { forwardRef, useImperativeHandle, useState } from "react";
 import cn from "@/utils/cn";
+import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
+import styled from "styled-components";
+
+const ProductColorWrapper = styled.div`
+  .product-nav-item {
+    border-color: #cccccc;
+  }
+`;
 
 const ProductCorlor = ({ colors, defaultColor, onChange }, ref) => {
   const [selectedColor, setSelectedColor] = useState(defaultColor);
@@ -14,11 +21,16 @@ const ProductCorlor = ({ colors, defaultColor, onChange }, ref) => {
   const _onColorChange = (e, color) => {
     e?.preventDefault();
     setSelectedColor(color);
-    onChange?.();
+    onChange?.(color);
   };
 
+  // Set default color when product detail loaded
+  useEffect(() => {
+    setSelectedColor(defaultColor);
+  }, [defaultColor]);
+
   return (
-    <div className="product-nav product-nav-dots">
+    <ProductColorWrapper className="product-nav product-nav-dots">
       {colors?.map((color, index) => {
         return (
           <div
@@ -33,7 +45,7 @@ const ProductCorlor = ({ colors, defaultColor, onChange }, ref) => {
           </div>
         );
       })}
-    </div>
+    </ProductColorWrapper>
   );
 };
 
