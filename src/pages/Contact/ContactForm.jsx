@@ -21,11 +21,19 @@ const ContactForm = ({ handleSubmitContactForm }) => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
 
   // Submit
   const onSubmit = (data) => {
     handleSubmitContactForm?.(data);
+    reset({
+      name: "",
+      email: "",
+      phone: "",
+      title: "",
+      description: "",
+    });
   };
   return (
     <div className="col-lg-6">
