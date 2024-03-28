@@ -13,7 +13,6 @@ const DealSection = ({ dealProducts }) => {
     .set({ hour: 17, minute: 0, second: 0, milisecond: 0 }); // 5pm tomorrow
 
   const dealOfTheDayProduct = dealProducts?.[0];
-  2;
 
   return (
     <div className="bg-light deal-container pt-7 pb-7 mb-5">

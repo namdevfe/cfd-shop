@@ -30,7 +30,7 @@ const CartSummary = ({ subTotal, total, typeShip, handleUpdateShipping }) => {
   };
 
   useEffect(() => {
-    handleUpdateShipping?.(SHIPPING_OPTIONS[0].value);
+    handleUpdateShipping?.(typeShip);
   }, [typeShip]);
 
   return (

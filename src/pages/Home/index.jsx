@@ -1,13 +1,11 @@
-import PageLoading from "@/components/PageLoading";
+import BrandSection from "./BrandSection";
+import DealSection from "./DealSection";
+import FeaturedSection from "./FeaturedSection";
+import GetDealSection from "./GetDealSection";
 import HotProductSection from "./HotProductSection";
 import IntroSection from "./IntroSection";
-import useHomePage from "./useHomePage";
-import useDebounce from "@/hooks/useDebounce";
-import DealSection from "./DealSection";
-import BrandSection from "./BrandSection";
-import FeaturedSection from "./FeaturedSection";
 import ServiceSection from "./ServiceSection";
-import GetDealSection from "./GetDealSection";
+import useHomePage from "./useHomePage";
 
 const Home = () => {
   const {
@@ -18,7 +16,7 @@ const Home = () => {
     featuredProps,
     serviceProps,
     getDealProps,
-    apiLoading,
+    // apiLoading,
   } = useHomePage();
   // const loading = useDebounce(apiLoading, 300);
 

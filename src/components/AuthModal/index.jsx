@@ -1,5 +1,4 @@
 import { MODAL_TYPES } from "@/constants/general";
-import { useAuthContext } from "@/context/AuthContext";
 import cn from "@/utils/cn";
 import styled from "styled-components";
 import LoginForm from "./LoginForm";
