@@ -1,56 +1,56 @@
-import { message } from "antd";
-import { Suspense, lazy, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import PrivateRoute from "./components/PrivateRoute";
-import { PATHS } from "./constants/path";
-import { handleGetProfile } from "./store/reducers/authReducer";
-import { handleGetCart } from "./store/reducers/cartReducer";
-import tokenMethod from "./utils/token";
-import PageLoading from "./components/PageLoading";
+import { message } from 'antd'
+import { Suspense, lazy, useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import PrivateRoute from './components/PrivateRoute'
+import { PATHS } from './constants/path'
+import { handleGetProfile } from './store/reducers/authReducer'
+import { handleGetCart } from './store/reducers/cartReducer'
+import tokenMethod from './utils/token'
+import PageLoading from './components/PageLoading'
 
-const MainLayout = lazy(() => import("./layouts/MainLayout"));
-const About = lazy(() => import("./pages/About"));
-const Blog = lazy(() => import("./pages/Blog"));
-const BlogDetail = lazy(() => import("./pages/BlogDetail"));
-const Cart = lazy(() => import("./pages/Cart"));
-const Checkout = lazy(() => import("./pages/Checkout"));
-const CheckoutSuccess = lazy(() => import("./pages/CheckoutSuccess"));
-const Contact = lazy(() => import("./pages/Contact"));
-const Dashboard = lazy(() => import("./pages/Dashboard"));
-const ChangePassword = lazy(() => import("./pages/Dashboard/ChangePassword"));
-const MyAccount = lazy(() => import("./pages/Dashboard/MyAccount"));
-const MyAddress = lazy(() => import("./pages/Dashboard/MyAddress"));
-const MyOrders = lazy(() => import("./pages/Dashboard/MyOrders"));
-const MyWishlist = lazy(() => import("./pages/Dashboard/MyWishlist"));
-const Faq = lazy(() => import("./pages/Faq"));
-const Home = lazy(() => import("./pages/Home"));
-const Page404 = lazy(() => import("./pages/Page404"));
-const PaymentMethod = lazy(() => import("./pages/PaymentMethod"));
-const Privacy = lazy(() => import("./pages/Privacy"));
-const Product = lazy(() => import("./pages/Product"));
-const ProductDetail = lazy(() => import("./pages/ProductDetail"));
-const Returns = lazy(() => import("./pages/Returns"));
-const Shipping = lazy(() => import("./pages/Shipping"));
+const MainLayout = lazy(() => import('./layouts/MainLayout'))
+const About = lazy(() => import('./pages/About'))
+const Blog = lazy(() => import('./pages/Blog'))
+const BlogDetail = lazy(() => import('./pages/BlogDetail'))
+const Cart = lazy(() => import('./pages/Cart'))
+const Checkout = lazy(() => import('./pages/Checkout'))
+const CheckoutSuccess = lazy(() => import('./pages/CheckoutSuccess'))
+const Contact = lazy(() => import('./pages/Contact'))
+const Dashboard = lazy(() => import('./pages/Dashboard'))
+const ChangePassword = lazy(() => import('./pages/Dashboard/ChangePassword'))
+const MyAccount = lazy(() => import('./pages/Dashboard/MyAccount'))
+const MyAddress = lazy(() => import('./pages/Dashboard/MyAddress'))
+const MyOrders = lazy(() => import('./pages/Dashboard/MyOrders'))
+const MyWishlist = lazy(() => import('./pages/Dashboard/MyWishlist'))
+const Faq = lazy(() => import('./pages/Faq'))
+const Home = lazy(() => import('./pages/Home'))
+const Page404 = lazy(() => import('./pages/Page404'))
+const PaymentMethod = lazy(() => import('./pages/PaymentMethod'))
+const Privacy = lazy(() => import('./pages/Privacy'))
+const Product = lazy(() => import('./pages/Product'))
+const ProductDetail = lazy(() => import('./pages/ProductDetail'))
+const Returns = lazy(() => import('./pages/Returns'))
+const Shipping = lazy(() => import('./pages/Shipping'))
 
 function App() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   // Config message antd
   message.config({
     top: 80,
     duration: 3,
-    maxCount: 3,
-  });
+    maxCount: 3
+  })
 
   useEffect(() => {
     if (tokenMethod.get()) {
       // Handle Get Profile
-      dispatch(handleGetProfile());
+      dispatch(handleGetProfile())
       // Handle Get Cart
-      dispatch(handleGetCart());
+      dispatch(handleGetCart())
     }
-  }, []);
+  }, [])
 
   return (
     <Suspense fallback={<PageLoading />}>
@@ -137,7 +137,7 @@ function App() {
         </Routes>
       </BrowserRouter>
     </Suspense>
-  );
+  )
 }
 
-export default App;
+export default App

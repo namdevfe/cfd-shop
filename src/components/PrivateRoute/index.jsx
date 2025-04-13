@@ -1,26 +1,26 @@
-import { MODAL_TYPES } from "@/constants/general";
-import { handleShowAuthModal } from "@/store/reducers/authReducer";
-import tokenMethod from "@/utils/token";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { Navigate, Outlet, useNavigate } from "react-router-dom";
+import { MODAL_TYPES } from '@/constants/general'
+import { handleShowAuthModal } from '@/store/reducers/authReducer'
+import tokenMethod from '@/utils/token'
+import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { Navigate, Outlet, useNavigate } from 'react-router-dom'
 
-const PrivateRoute = ({ redirectPath = "" }) => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const isLogin = !!tokenMethod.get();
+const PrivateRoute = ({ redirectPath = '' }) => {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const isLogin = !!tokenMethod.get()
 
   useEffect(() => {
     if (!isLogin) {
-      dispatch(handleShowAuthModal(MODAL_TYPES.LOGIN));
+      dispatch(handleShowAuthModal(MODAL_TYPES.LOGIN))
     }
-  }, []);
+  }, [])
 
   if (!isLogin) {
     if (!!redirectPath) {
-      return <Navigate to={redirectPath} />;
+      return <Navigate to={redirectPath} />
     } else {
-      navigate(-1);
+      navigate(-1)
     }
   }
 
@@ -28,7 +28,7 @@ const PrivateRoute = ({ redirectPath = "" }) => {
     <>
       <Outlet />
     </>
-  );
-};
+  )
+}
 
-export default PrivateRoute;
+export default PrivateRoute
