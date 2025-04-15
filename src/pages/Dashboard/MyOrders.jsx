@@ -71,7 +71,7 @@ const MyOrders = () => {
                   let imagePath = images?.[0];
                   if (imagePath?.split("https")?.length > 2) {
                     imagePath = imagePath.split("https");
-                    imagePath = `https${imagePath[2]}`;
+                    imagePath = `https${imagePath[imagePath?.length - 1]}`;
                   }
                   return (
                     <tr key={id + index}>
