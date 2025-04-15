@@ -75,6 +75,7 @@ const CheckoutForm = ({ handleCheckout }) => {
     control,
     getValues,
     formState: { errors },
+    trigger
   } = useForm({
     defaultValues: {
       fullName: firstName,
@@ -134,9 +135,11 @@ const CheckoutForm = ({ handleCheckout }) => {
           formInfo,
           cartInfo,
         });
+
+        Modal.destroyAll()
       },
       onCancel() {
-        console.log("🚀cancel---->");
+        
       },
     });
   };
@@ -496,7 +499,11 @@ const CheckoutForm = ({ handleCheckout }) => {
               type="submit"
               className="btn-order btn-block"
               variant="outline"
-              onClick={_onSubmit}
+              onClick={async () => {
+                const result = await trigger()
+                if (!result) return
+                _onSubmit()
+              }}
             >
               <span className="btn-text">Place Order</span>
               <span className="btn-hover-text">Proceed to Checkout</span>
